@@ -14,3 +14,8 @@ My Game Off 2021 game.
 > new menace. He found a bug! There is no option: that droid should be destroyed.
 >
 > Help Diddi to defeat this buggy machine!
+
+## Game engine
+
+I am planning to build this game using [Pygame](https://www.pygame.org/). I will upload the complete code,
+assets and other useful stuff on this repo.
