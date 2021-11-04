@@ -1,4 +1,4 @@
-# Diddi and the Bug
+# Diddi and the Bugs
 
 My Game Off 2021 game.
 
