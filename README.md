@@ -13,7 +13,8 @@ My Game Off 2021 game.
 > alive. That should destroy those bugs...
 >
 > To ensure that those bugs will be destroyed, Diddi modified his spacecraft to convert it into a
-> starfighter that shoots the lifesaver serum...
+> starfighter that shoots the lifesaver serum. Then, he named the starfighter **Willpower**.
+> Suddendly, the Willpower goes outside of the planet, to start the fight...
 
 ## Game engine
 
