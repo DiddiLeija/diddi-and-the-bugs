@@ -1,0 +1,34 @@
+  _____    _____
+ /     \  /     \
+|       \/       |
+ \              /
+   \  THANKS  /
+     \      /
+       \  /
+        \/
+
+A list of people that, one way or another, contributed to make this possible.
+Even if their names doesn't appear on the commit history of the project!
+
+====
+
+  _____________
+ /             \
+|     o o o     |
+ \___________  /
+             \/
+
+Thanks to Alexandra Marquez, who gave me the idea behind
+the storyline. Without that, this project would not be
+possible.
+
+====
+
+ ,--.
+|  oo|
+|  ~~| o o o o
+|/\/\|
+
+Thanks to Takashi Kitao, the author of Pyxel. That package
+is the main fuel of my game. The reference and the source code
+can be found at <https://github.com/kitao/pyxel>.
