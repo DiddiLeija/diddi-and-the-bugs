@@ -142,6 +142,7 @@ class App:
         if pyxel.btnp(pyxel.KEY_P):
             if self.pause:
                 self.pause = False
+                pyxel.playm(0, loop=True)
             else:
                 self.pause = True
         if self.pause and self.alive:
@@ -221,6 +222,7 @@ class App:
         pyxel.text(70, 4, enem_count, 7)
         if self.pause and self.alive:
             # paused, don't worry
+            pyxel.stop()
             pyxel.text(
                 19,
                 50,
