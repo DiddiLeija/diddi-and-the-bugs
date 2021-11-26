@@ -21,6 +21,8 @@ My Game Off 2021 game.
 Use the energized serum to destroy **200 bugs** and win! In the meantime, you can earn extra points
 by destroying space trash. **Try to get all the points as you can!**
 
+Read the [game guide](https://github.com/DiddiLeija/diddi-and-the-bugs/blob/main/guide.md) for more information.
+
 ## Game engine
 
 I am planning to build this game using [Pyxel](https://github.com/kitao/pyxel). I will upload the complete code,
