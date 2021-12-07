@@ -1,6 +1,6 @@
-![image](https://user-images.githubusercontent.com/83621221/143620749-7f65115f-c591-443e-a0d7-6d2abb1e8030.png)
-
 # Diddi and the Bugs -- The definitive guide
+
+![image](https://user-images.githubusercontent.com/83621221/143620749-7f65115f-c591-443e-a0d7-6d2abb1e8030.png)
 
 Every game, book and story has a universe... and this game
 has a universe too! This guide explains how to get the greatest
