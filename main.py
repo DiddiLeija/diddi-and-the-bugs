@@ -6,7 +6,7 @@ import random
 
 import pyxel
 
-pyxel.init(160, 120, caption="Diddi and the Bugs")
+pyxel.init(160, 120, title="Diddi and the Bugs")
 
 
 class Bullet:
@@ -169,9 +169,9 @@ class App:
             self.already_won = True
 
     def move_spacecraft(self):
-        if pyxel.btn(pyxel.KEY_UP) or pyxel.btn(pyxel.GAMEPAD_1_UP):
+        if pyxel.btn(pyxel.KEY_UP):
             self.player_y = max(self.player_y - 2, 10)
-        elif pyxel.btn(pyxel.KEY_DOWN) or pyxel.btn(pyxel.GAMEPAD_1_DOWN):
+        elif pyxel.btn(pyxel.KEY_DOWN):
             self.player_y = min(self.player_y + 2, pyxel.height - 10)
 
     def add_enemies(self):
