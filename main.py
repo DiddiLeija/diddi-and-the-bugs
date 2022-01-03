@@ -123,6 +123,7 @@ class App:
         self.trash = [Trash() for sth in range(50)]
         self.score = 0
 
+        pyxel.stop()
         pyxel.playm(0, loop=True)
         pyxel.run(self.update, self.draw)
 
@@ -151,6 +152,7 @@ class App:
             return None
         if pyxel.btnp(pyxel.KEY_SPACE):
             self.bullet_list.append(Bullet(self.player_x + 9, self.player_y + 3))
+            pyxel.playm(3)
         for bullet in self.bullet_list:
             if bullet.alive:
                 bullet.update()
@@ -165,6 +167,7 @@ class App:
 
         if len(self.enemies) < 1 and self.alive and not self.already_won:
             # we can play a victory sound!
+            pyxel.stop()
             pyxel.playm(2)
             self.already_won = True
 
@@ -185,10 +188,12 @@ class App:
                         self.enemies[enem].y - 5, self.enemies[enem].y + 5
                     ):
                         self.alive = False
+                        pyxel.stop()
                         pyxel.playm(1)
                 else:
                     self.score += 10
                     self.enemies.pop(enem)
+                    pyxel.playm(4)
         except Exception:
             # out of range, just pass
             pass
@@ -204,10 +209,12 @@ class App:
                         self.trash[item].y - 5, self.trash[item].y + 5
                     ):
                         self.alive = False
+                        pyxel.stop()
                         pyxel.playm(1)
                 else:
                     self.score += random.choice([50, 100, 200])
                     self.trash.pop(item)
+                    pyxel.playm(4)
         except Exception:
             # just like the enemies, this will just pass
             pass
