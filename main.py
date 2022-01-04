@@ -84,7 +84,7 @@ class Enemy:
         if not self.show:
             return None
         if self.alive:
-            pyxel.blt(self.x, self.y, 0, self.aspect[0], self.aspect[1], 8, 8)
+            pyxel.blt(self.x, self.y, 0, self.aspect[0], self.aspect[1], 8, 8, 0)
 
 
 class Trash(Enemy):
@@ -251,7 +251,7 @@ class App:
             )
         elif self.alive:
             # the show is keep going!
-            pyxel.blt(self.player_x, self.player_y, 0, 8, 0, 8, 8)
+            pyxel.blt(self.player_x, self.player_y, 0, 8, 0, 8, 8, 0)
             for bullet in self.bullet_list:
                 bullet.draw()
             for enem in self.enemies:
