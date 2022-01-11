@@ -119,6 +119,8 @@ class App:
         self.player_y = 50
         self.player_lives = 3
         self.bullet_list = []
+        self.bullet_last_num_frame = 0
+        self.bullet_last_two_frames = False
         self.enemies = [Enemy() for sth in range(200)]
         self.trash = [Trash() for sth in range(50)]
         self.score = 0
@@ -151,11 +153,25 @@ class App:
         if not self.alive or self.already_won:
             return None
         if pyxel.btnp(pyxel.KEY_SPACE):
-            self.bullet_list.append(Bullet(self.player_x + 9, self.player_y + 3))
-            pyxel.playm(3)
+            self.bullet_last_num_frame += 1
+            if self.bullet_last_two_frames:
+                # if pyxel.frame_count % 2 == 0:
+                #     self.bullet_list.append(Bullet(self.player_x + 9, self.player_y + 3))
+                pass
+            else:
+                self.bullet_list.append(Bullet(self.player_x + 9, self.player_y + 3))
+                pyxel.playm(3)
+
+        print(len(self.bullet_list), self.bullet_last_num_frame, self.bullet_last_two_frames)
+
+        if pyxel.btnr(pyxel.KEY_SPACE):
+            self.bullet_last_num_frame = 0
+            self.bullet_last_two_frames = False
         for bullet in self.bullet_list:
             if bullet.alive:
                 bullet.update()
+            else:
+                self.bullet_list.remove(bullet)
         for enem in self.enemies:
             enem.try_to_activate(len(self.enemies))
         for trash in self.trash:
@@ -170,6 +186,10 @@ class App:
             pyxel.stop()
             pyxel.playm(2)
             self.already_won = True
+
+        if self.bullet_last_num_frame >= 2:
+            self.bullet_last_num_frame = 0
+            self.bullet_last_two_frames = True
 
     def move_spacecraft(self):
         if pyxel.btn(pyxel.KEY_UP):
