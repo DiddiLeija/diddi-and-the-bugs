@@ -35,13 +35,13 @@ class Enemy:
 
     def __init__(self):
         self.possible_enemies = [
+            (0, 8),
             (8, 8),
             (16, 0),
             (24, 0),
             (32, 0),
+            (32, 8),
             (40, 0),
-            (48, 8),
-            (56, 8),
         ]
         self.aspect = random.choice(self.possible_enemies)
         self.x = pyxel.width
