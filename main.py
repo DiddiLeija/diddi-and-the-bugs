@@ -156,7 +156,9 @@ class App:
             self.bullet_last_num_frame += 1
             if self.bullet_last_two_frames:
                 if pyxel.frame_count % 2 == 0:
-                    self.bullet_list.append(Bullet(self.player_x + 9, self.player_y + 3))
+                    self.bullet_list.append(
+                        Bullet(self.player_x + 9, self.player_y + 3)
+                    )
                     pyxel.playm(3)
             else:
                 self.bullet_list.append(Bullet(self.player_x + 9, self.player_y + 3))
