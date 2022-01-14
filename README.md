@@ -26,6 +26,10 @@ The itch.io page for my game is here: https://diddileija.itch.io/diddi-and-the-b
 Once you are there, read the installation instructions and find a stand-alone executable for you (or try the Python edition).
 If you don't find what you expected, feel free to open an issue on GitHub or comment in the itch.io page.
 
+### Python version
+
+If you will use Python get sure to have **Python >= 3.7**.
+
 ## How to win
 
 Use the energized serum to destroy **200 bugs** and win! In the meantime, you can earn extra points
