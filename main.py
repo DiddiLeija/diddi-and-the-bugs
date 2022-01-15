@@ -110,6 +110,11 @@ class App:
     "The main piece of the game. It also operates the starfighter."
 
     def __init__(self):
+        self.reset()
+
+        pyxel.run(self.update, self.draw)
+
+    def reset(self):
         pyxel.load("resource.pyxres")
 
         self.alive = True  # the player is still alive
@@ -127,22 +132,13 @@ class App:
 
         pyxel.stop()
         pyxel.playm(0, loop=True)
-        pyxel.run(self.update, self.draw)
 
     def update(self):
         if pyxel.btnp(pyxel.KEY_Q):
             pyxel.quit()
-        if pyxel.btnp(pyxel.KEY_R):
-            try:
-                self.__init__()
-            except SystemExit:
-                # a patch to avoid a weird bug: if
-                # you press R repeatadly, and press
-                # Q at that time, Pyxel will raise a
-                # SystemExit. Just to be fancier, we
-                # catch that exception and quit cleanly
-                pyxel.quit()
-        if pyxel.btnp(pyxel.KEY_P):
+        if pyxel.btnr(pyxel.KEY_R):
+            self.reset()
+        if pyxel.btnr(pyxel.KEY_P):
             if self.pause:
                 self.pause = False
                 pyxel.playm(0, loop=True)
