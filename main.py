@@ -113,10 +113,10 @@ class App:
         self.reset()
 
         pyxel.run(self.update, self.draw)
-    
+
     def reset(self):
         pyxel.load("resource.pyxres")
-        
+
         self.alive = True  # the player is still alive
         self.already_won = False
         self.pause = False
@@ -289,5 +289,6 @@ class App:
             pyxel.text(
                 20, 50, "Oh no! :( Press R to restart\n or press Q to quit the game", 7
             )
+
 
 App()
