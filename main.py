@@ -124,8 +124,10 @@ class App:
         self.player_y = 50
         self.player_lives = 3
         self.bullet_list = []
+        self.continous_bullets_delay = 50
+        self.continous_bullets_spacing = 2
         self.bullet_last_num_frame = 0
-        self.bullet_last_two_frames = False
+        self.bullet_last_held_long = False
         self.enemies = [Enemy() for sth in range(200)]
         self.trash = [Trash() for sth in range(50)]
         self.score = 0
@@ -136,9 +138,9 @@ class App:
     def update(self):
         if pyxel.btnp(pyxel.KEY_Q):
             pyxel.quit()
-        if pyxel.btnr(pyxel.KEY_R):
+        if pyxel.btnp(pyxel.KEY_R):
             self.reset()
-        if pyxel.btnr(pyxel.KEY_P):
+        if pyxel.btnp(pyxel.KEY_P):
             if self.pause:
                 self.pause = False
                 pyxel.playm(0, loop=True)
@@ -149,20 +151,24 @@ class App:
         if not self.alive or self.already_won:
             return None
         if pyxel.btnp(pyxel.KEY_SPACE):
+            # Reverting back the firing logic that was here, inside of `pyxel.btnp()`
+            self.bullet_list.append(Bullet(self.player_x + 9, self.player_y + 3))
+            pyxel.playm(3)
+
+        if pyxel.btn(pyxel.KEY_SPACE):
+            # The continous bullet easter-egg goes here, under `pyxel.btn()`
             self.bullet_last_num_frame += 1
-            if self.bullet_last_two_frames:
-                if pyxel.frame_count % 2 == 0:
+            if self.bullet_last_held_long:
+                if pyxel.frame_count % self.continous_bullets_spacing == 0:
                     self.bullet_list.append(
                         Bullet(self.player_x + 9, self.player_y + 3)
                     )
                     pyxel.playm(3)
-            else:
-                self.bullet_list.append(Bullet(self.player_x + 9, self.player_y + 3))
-                pyxel.playm(3)
 
         if pyxel.btnr(pyxel.KEY_SPACE):
+            # Reset continous bullets back if space key is released
             self.bullet_last_num_frame = 0
-            self.bullet_last_two_frames = False
+            self.bullet_last_held_long = False
         for bullet in self.bullet_list:
             if bullet.alive:
                 bullet.update()
@@ -183,14 +189,20 @@ class App:
             pyxel.playm(2)
             self.already_won = True
 
-        if self.bullet_last_num_frame >= 2:
+        if self.bullet_last_num_frame >= self.continous_bullets_delay:
             self.bullet_last_num_frame = 0
-            self.bullet_last_two_frames = True
+            self.bullet_last_held_long = True
 
     def move_spacecraft(self):
         if pyxel.btn(pyxel.KEY_UP):
             self.player_y = max(self.player_y - 2, 10)
+            # Resetting bullets back when moved
+            self.bullet_last_num_frame = 0
+            self.bullet_last_held_long = False
         elif pyxel.btn(pyxel.KEY_DOWN):
+            # Resetting bullets back when moved
+            self.bullet_last_num_frame = 0
+            self.bullet_last_held_long = False
             self.player_y = min(self.player_y + 2, pyxel.height - 10)
 
     def add_enemies(self):
