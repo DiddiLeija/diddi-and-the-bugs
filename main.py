@@ -130,7 +130,7 @@ class App:
         self.player_y = 50
         self.player_lives = 3
         self.bullet_list = []
-        self.continous_bullets_delay = 50
+        self.continous_bullets_delay = 30
         self.continous_bullets_spacing = 2
         self.bullet_last_num_frame = 0
         self.bullet_last_held_long = False
