@@ -29,10 +29,10 @@ class Bullet:
 
     def draw(self):
         if self.alive:
-            # Will display in orange color (9) when
+            # Will display in dark green color (13) when
             # the bullet trick is on. If not, the bullet
-            # will be green (11).
-            color = 9 if self.bullet_trick else 11
+            # will be a lighter green (11).
+            color = 13 if self.bullet_trick else 11
             pyxel.rect(self.x, self.y, self.w, self.h, color)
 
 
