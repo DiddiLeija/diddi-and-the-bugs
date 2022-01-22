@@ -12,13 +12,15 @@ pyxel.init(160, 120, title="Diddi and the Bugs")
 class Bullet:
     "An independent bullet."
 
-    def __init__(self, x, y):
+    def __init__(self, x, y, bullet_trick=False):
         self.x = x
         self.y = y
         self.h = 2
         self.w = 6
         self.speed = 4
         self.alive = True
+        # When "bullet_trick" is set True, it is part of the "bullet trick"
+        self.bullet_trick = bullet_trick
 
     def update(self):
         self.x += self.speed
@@ -27,7 +29,11 @@ class Bullet:
 
     def draw(self):
         if self.alive:
-            pyxel.rect(self.x, self.y, self.w, self.h, 11)
+            # Will display in dark green color (13) when
+            # the bullet trick is on. If not, the bullet
+            # will be a lighter green (11).
+            color = 13 if self.bullet_trick else 11
+            pyxel.rect(self.x, self.y, self.w, self.h, color)
 
 
 class Enemy:
@@ -124,7 +130,7 @@ class App:
         self.player_y = 50
         self.player_lives = 3
         self.bullet_list = []
-        self.continous_bullets_delay = 50
+        self.continous_bullets_delay = 30
         self.continous_bullets_spacing = 2
         self.bullet_last_num_frame = 0
         self.bullet_last_held_long = False
@@ -161,7 +167,7 @@ class App:
             if self.bullet_last_held_long:
                 if pyxel.frame_count % self.continous_bullets_spacing == 0:
                     self.bullet_list.append(
-                        Bullet(self.player_x + 9, self.player_y + 3)
+                        Bullet(self.player_x + 9, self.player_y + 3, True)
                     )
                     pyxel.playm(3)
 
