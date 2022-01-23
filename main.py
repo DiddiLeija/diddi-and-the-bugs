@@ -200,16 +200,18 @@ class App:
             self.bullet_last_held_long = True
 
     def move_spacecraft(self):
-        if pyxel.btn(pyxel.KEY_UP):
+        if pyxel.btn(pyxel.KEY_UP) or pyxel.btn(pyxel.KEY_W):
+            # Move up
             self.player_y = max(self.player_y - 2, 10)
             # Resetting bullets back when moved
             self.bullet_last_num_frame = 0
             self.bullet_last_held_long = False
-        elif pyxel.btn(pyxel.KEY_DOWN):
+        elif pyxel.btn(pyxel.KEY_DOWN) or pyxel.btn(pyxel.KEY_S):
+            # Move down
+            self.player_y = min(self.player_y + 2, pyxel.height - 10)
             # Resetting bullets back when moved
             self.bullet_last_num_frame = 0
             self.bullet_last_held_long = False
-            self.player_y = min(self.player_y + 2, pyxel.height - 10)
 
     def add_enemies(self):
         try:
