@@ -19,7 +19,7 @@ If you press some keys, some actions may happen.
 
 ### Spacecraft (Willpower) keys
 
-- **Up / down keys**: Use them to move the Willpower, and avoid enemies.
+- **Up / down keys**: Use them to move the Willpower, and avoid enemies. You can also use WASD (**W and S,** respectively)
 - **Space**: Send a bullet of _L1-F3_ energized serum, that can destroy both bugs
   and trash!
 
