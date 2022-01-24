@@ -3,8 +3,17 @@ The piece of code that puts everything together.
 """
 
 import random
+import sys
 
 import pyxel
+
+# When bumping to a higher Python requirement, please
+# modify this varible, basically to avoid users from
+# running with an old Python.
+EXPECTED_PYTHON = (3, 7)
+
+if sys.version_info < EXPECTED_PYTHON:
+    sys.exit(f"Error: expected Python version {EXPECTED_PYTHON} or newer, got {sys.version_info}")
 
 pyxel.init(160, 120, title="Diddi and the Bugs")
 
