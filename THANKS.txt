@@ -32,3 +32,16 @@ possible.
 Thanks to Takashi Kitao, the author of Pyxel. That package
 is the main fuel of my game. The reference and the source code
 can be found at <https://github.com/kitao/pyxel>.
+
+====
+ ________
+|       |\
+|       |_\
+| x ----- |
+| x ----- |
+| o ----- |
+| x ----- |
+|_________|
+
+Thanks to the people that contributed on GitHub. See their names at
+<https://github.com/DiddiLeija/diddi-and-the-bugs/graphs/contributors>.
