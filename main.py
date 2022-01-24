@@ -13,7 +13,9 @@ import pyxel
 EXPECTED_PYTHON = (3, 7)
 
 if sys.version_info < EXPECTED_PYTHON:
-    sys.exit(f"Error: expected Python version {EXPECTED_PYTHON} or newer, got {sys.version_info}")
+    sys.exit(
+        f"Error: expected Python version {EXPECTED_PYTHON} or newer, got {sys.version_info}"
+    )
 
 pyxel.init(160, 120, title="Diddi and the Bugs")
 
