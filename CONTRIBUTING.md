@@ -1,0 +1,51 @@
+# Contributing to _Diddi and the Bugs_
+
+This is an open source project, so contributors are welcome. We have added here a short guide to contribute, and a few suggestions.
+
+## License
+
+This project is licensed under the [MIT License](https://github.com/DiddiLeija/diddi-and-the-bugs/blob/main/LICENSE).
+
+## Issues and pull requests
+
+At GitHub, we enabled issues. You can use them for reporting bugs, requesting new features, etc. It is recommended to open an issue before
+sending a pull request, so we can discuss your idea first.
+
+## Getting started with code contributions
+
+### Get the code
+
+If you have a fork of [this game's repository](https://github.com/DiddiLeija/diddi-and-the-bugs), and you have
+installed Git, you can clone it locally by running this command:
+
+```
+git clone https://github.com/[your-username]/diddi-and-the-bugs
+cd diddi-and-the-bugs
+```
+
+After that, you can open branches, push commits... that's up to you.
+
+### Get the tools
+
+You will need some additional stuff before getting started:
+
+- [Python](https://python.org) (3.7 or higher)
+- [Nox](https://nox.thea.codes), for running linters and formatters
+- [Pyxel](https://github.com/kitao/pyxel) (you can both install the `requirements.txt` file,
+  or the version pinned on that file using [this instructions](https://github.com/kitao/pyxel#how-to-install))
+
+Also, you may want to set up a virtual environment for installing the packages (except Python), but that's optional.
+
+### Run linters and checks
+
+We use [black](https://github.com/psf/black), [isort](https://github.com/PyCQA/isort) and [flake8](https://github.com/PyCQA/flake8) for keeping
+things civilized. On GitHub, the CI (Continous Integration) will do it for you. But in a local clone, you can use Nox for this.
+
+Just run this command in the root directory of the repository:
+
+```
+nox
+```
+
+This will run formatters, and then the linters. Most of the issues should be resolved by the formatters, but you may find issues when linting. You
+can run Nox as many times as you need.
