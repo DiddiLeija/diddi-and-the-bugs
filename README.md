@@ -41,3 +41,7 @@ Read the [game guide](https://github.com/DiddiLeija/diddi-and-the-bugs/blob/main
 
 I am planning to build this game using [Pyxel](https://github.com/kitao/pyxel), a Python tool for retro games. I will upload the complete code,
 assets and other useful stuff on this repo. The executables must be available at the itch.io page.
+
+## Contributing
+
+Read [this contributing guidelines](https://github.com/DiddiLeija/diddi-and-the-bugs/blob/main/CONTRIBUTING.md) for full details.
