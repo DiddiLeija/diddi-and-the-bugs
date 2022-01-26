@@ -15,7 +15,7 @@ directory!
 import sys
 
 try:
-    from cx_Freeze import setup, Executable
+    from cx_Freeze import Executable, setup
 except ImportError:
     sys.exit("COuld not find package 'cx_Freeze'. Please install it and try again.")
 
@@ -36,5 +36,10 @@ setup(
     description="Diddi vs. Bugs!",
     author="Diego Ramirez",
     author_email="dr01191115@gmail.com",
-    executables=[Executable("main.py", base="Win32GUI", )],
+    executables=[
+        Executable(
+            "main.py",
+            base="Win32GUI",
+        )
+    ],
 )
