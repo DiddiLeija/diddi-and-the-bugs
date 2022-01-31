@@ -17,7 +17,7 @@ if sys.version_info < EXPECTED_PYTHON:
         f"Error: expected Python version {EXPECTED_PYTHON} or newer, got {sys.version_info}"
     )
 
-pyxel.init(160, 120, title="Diddi and the Bugs")
+pyxel.init(200, 160, title="Diddi and the Bugs")
 
 
 class Bullet:
