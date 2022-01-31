@@ -17,7 +17,7 @@ if sys.version_info < EXPECTED_PYTHON:
         f"Error: expected Python version {EXPECTED_PYTHON} or newer, got {sys.version_info}"
     )
 
-pyxel.init(200, 160, title="Diddi and the Bugs")
+pyxel.init(180, 140, title="Diddi and the Bugs")
 
 
 class Bullet:
@@ -62,7 +62,7 @@ class Enemy:
         ]
         self.aspect = random.choice(self.possible_enemies)
         self.x = pyxel.width
-        self.y = random.randint(10, pyxel.height - 10)
+        self.y = random.randint(10, pyxel.height - 28)
         self.max_speed = 2
         self.speed = random.randint(1, self.max_speed)
         self.alive = True
@@ -85,7 +85,7 @@ class Enemy:
         if self.x == 0:
             self.aspect = random.choice(self.possible_enemies)
             self.x = pyxel.width
-            self.y = random.randint(10, pyxel.height - 10)
+            self.y = random.randint(10, pyxel.height - 28)
             self.speed = random.randint(1, self.max_speed)
             self.show = False
         for bullet in bullets:
@@ -117,7 +117,7 @@ class Trash(Enemy):
         self.aspect = random.choice(self.possible_enemies)
         self.max_speed = 3
         self.x = pyxel.width
-        self.y = random.randint(10, pyxel.height - 10)
+        self.y = random.randint(10, pyxel.height - 28)
         self.speed = random.randint(1, self.max_speed)
         self.alive = True
         self.show = False
@@ -219,7 +219,7 @@ class App:
             self.bullet_last_held_long = False
         elif pyxel.btn(pyxel.KEY_DOWN) or pyxel.btn(pyxel.KEY_S):
             # Move down
-            self.player_y = min(self.player_y + 2, pyxel.height - 10)
+            self.player_y = min(self.player_y + 2, pyxel.height - 28)
             # Resetting bullets back when moved
             self.bullet_last_num_frame = 0
             self.bullet_last_held_long = False
@@ -266,6 +266,11 @@ class App:
             # just like the enemies, this will just pass
             pass
 
+    def draw_message_bar(self):
+        # This will draw the messages bar.
+        pyxel.rect(0, pyxel.height - 20, pyxel.width, 20, 1)
+        pyxel.rect(0, pyxel.height - 20, pyxel.width, 2, 13)
+
     def draw(self):
         pyxel.cls(0)
         score = f"Score: {self.score}"
@@ -274,6 +279,7 @@ class App:
         pyxel.text(4, 4, score, 7)
         pyxel.text(71, 4, enem_count, 1)
         pyxel.text(70, 4, enem_count, 7)
+        self.draw_message_bar()
         if self.pause and self.alive:
             # paused, don't worry
             pyxel.stop()
