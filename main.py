@@ -131,6 +131,8 @@ class App:
         # we are keeping a message record until
         # the app quits.
         self.messages = []
+        
+        self.message_goodies = ["Woo hoo!", "Let's save the Earth!", "Find the 'easter eggs'!", "Willpower to Earth, can you hear me?"]
 
         self.reset()
 
@@ -171,6 +173,8 @@ class App:
                 pyxel.playm(0, loop=True)
             else:
                 self.pause = True
+        if pyxel.btnp(pyxel.KEY_M):
+            self.add_message(random.choice(self.message_goodies))
         if pyxel.btnr(pyxel.KEY_P) and self.alive:
             # We have just raised a "pause event", so we should say it
             self.add_message("Game paused" if self.pause else "Game resumed", True)
