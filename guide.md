@@ -1,6 +1,7 @@
 # Diddi and the Bugs -- The definitive guide
 
-![image](https://user-images.githubusercontent.com/83621221/147975798-9f8df786-a081-4073-89d9-26da7abbf323.png)
+<img width=800 src="https://user-images.githubusercontent.com/83621221/152022041-9ca787f0-5334-4f22-becd-e270f3067a95.png">
+
 
 Every game, book and story has a universe... and this game
 has a universe too! This guide explains how to get the greatest
@@ -23,7 +24,7 @@ If you press some keys, some actions may happen.
 - **Space**: Send a bullet of _L1-F3_ energized serum, that can destroy both bugs
   and trash!
 
-## Element guide
+## Elements guide
 
 A quick guide to all the elements on the game.
 
@@ -64,4 +65,13 @@ The idea is to **destroy 200 bugs**.
 
 Unfortunately, our loveful Earth's atmosphere is filled up with trash. But you
 can help to destroy them using bullets. If you destroy one, you can earn
-**50,100 or even 200 extra points**! However, if they touch you, you will loose the game.
+**50, 100 or even 200 extra points**! However, if they touch you, you will loose the game.
+
+### Messages bar
+
+![image](https://user-images.githubusercontent.com/83621221/152022721-4965b55e-79d8-4b77-8b08-ce0a43f4ede9.png)
+
+_New in version 2.0.0._
+
+This is the "event log". Here, you can notified by both Diddi or the "System" when something happens. For example, when you pause or
+restart the game. Also, if you find one of our "easter eggs", you'll get notified too!

@@ -17,7 +17,7 @@ if sys.version_info < EXPECTED_PYTHON:
         f"Error: expected Python version {EXPECTED_PYTHON} or newer, got {sys.version_info}"
     )
 
-pyxel.init(160, 120, title="Diddi and the Bugs")
+pyxel.init(180, 140, title="Diddi and the Bugs")
 
 
 class Bullet:
@@ -62,7 +62,7 @@ class Enemy:
         ]
         self.aspect = random.choice(self.possible_enemies)
         self.x = pyxel.width
-        self.y = random.randint(10, pyxel.height - 10)
+        self.y = random.randint(10, pyxel.height - 28)
         self.max_speed = 2
         self.speed = random.randint(1, self.max_speed)
         self.alive = True
@@ -85,7 +85,7 @@ class Enemy:
         if self.x == 0:
             self.aspect = random.choice(self.possible_enemies)
             self.x = pyxel.width
-            self.y = random.randint(10, pyxel.height - 10)
+            self.y = random.randint(10, pyxel.height - 28)
             self.speed = random.randint(1, self.max_speed)
             self.show = False
         for bullet in bullets:
@@ -117,7 +117,7 @@ class Trash(Enemy):
         self.aspect = random.choice(self.possible_enemies)
         self.max_speed = 3
         self.x = pyxel.width
-        self.y = random.randint(10, pyxel.height - 10)
+        self.y = random.randint(10, pyxel.height - 28)
         self.speed = random.randint(1, self.max_speed)
         self.alive = True
         self.show = False
@@ -127,7 +127,14 @@ class App:
     "The main piece of the game. It also operates the starfighter."
 
     def __init__(self):
+        # This variable is not on `reset`, because
+        # we are keeping a message record until
+        # the app quits.
+        self.messages = []
+
         self.reset()
+
+        self.add_message("Let's go!")
 
         pyxel.run(self.update, self.draw)
 
@@ -143,6 +150,7 @@ class App:
         self.bullet_list = []
         self.continous_bullets_delay = 30
         self.continous_bullets_spacing = 2
+        self.continous_bullets_message = False
         self.bullet_last_num_frame = 0
         self.bullet_last_held_long = False
         self.enemies = [Enemy() for sth in range(200)]
@@ -163,6 +171,11 @@ class App:
                 pyxel.playm(0, loop=True)
             else:
                 self.pause = True
+        if pyxel.btnr(pyxel.KEY_P) and self.alive:
+            # We have just raised a "pause event", so we should say it
+            self.add_message("Game paused" if self.pause else "Game resumed", True)
+        if pyxel.btnr(pyxel.KEY_R):
+            self.add_message("Re-started the game", True)
         if self.pause and self.alive:
             return None
         if not self.alive or self.already_won:
@@ -177,6 +190,9 @@ class App:
             self.bullet_last_num_frame += 1
             if self.bullet_last_held_long:
                 if pyxel.frame_count % self.continous_bullets_spacing == 0:
+                    if not self.continous_bullets_message:
+                        self.add_message("Ah! Continous bullets!")
+                        self.continous_bullets_message = True
                     self.bullet_list.append(
                         Bullet(self.player_x + 9, self.player_y + 3, True)
                     )
@@ -186,6 +202,7 @@ class App:
             # Reset continous bullets back if space key is released
             self.bullet_last_num_frame = 0
             self.bullet_last_held_long = False
+            self.continous_bullets_message = False
         for bullet in self.bullet_list:
             if bullet.alive:
                 bullet.update()
@@ -205,6 +222,7 @@ class App:
             pyxel.stop()
             pyxel.playm(2)
             self.already_won = True
+            self.add_message("Yay! We won!")
 
         if self.bullet_last_num_frame >= self.continous_bullets_delay:
             self.bullet_last_num_frame = 0
@@ -219,7 +237,7 @@ class App:
             self.bullet_last_held_long = False
         elif pyxel.btn(pyxel.KEY_DOWN) or pyxel.btn(pyxel.KEY_S):
             # Move down
-            self.player_y = min(self.player_y + 2, pyxel.height - 10)
+            self.player_y = min(self.player_y + 2, pyxel.height - 28)
             # Resetting bullets back when moved
             self.bullet_last_num_frame = 0
             self.bullet_last_held_long = False
@@ -237,6 +255,7 @@ class App:
                         self.alive = False
                         pyxel.stop()
                         pyxel.playm(1)
+                        self.add_message("Oh no! We loose!")
                 else:
                     self.score += 10
                     self.enemies.pop(enem)
@@ -258,6 +277,7 @@ class App:
                         self.alive = False
                         pyxel.stop()
                         pyxel.playm(1)
+                        self.add_message("Oh no! We loose!")
                 else:
                     self.score += random.choice([50, 100, 200])
                     self.trash.pop(item)
@@ -265,6 +285,24 @@ class App:
         except Exception:
             # just like the enemies, this will just pass
             pass
+
+    def add_message(self, msg, system=False):
+        self.messages.append(f"{'Diddi' if not system else 'System'}: {msg}")
+        if len(self.messages) >= 3:
+            self.messages.pop(0)
+
+    def draw_message_bar(self):
+        # This will draw the messages bar.
+        pyxel.rect(0, pyxel.height - 20, pyxel.width, 20, 5)
+        pyxel.rect(0, pyxel.height - 20, pyxel.width, 2, 13)
+
+        # Draw the messages
+        if len(self.messages) > 0:
+            pyxel.text(1, pyxel.height - 17, self.messages[0], 1)
+            pyxel.text(2, pyxel.height - 17, self.messages[0], 7)
+        if len(self.messages) > 1:
+            pyxel.text(1, pyxel.height - 8, self.messages[1], 1)
+            pyxel.text(2, pyxel.height - 8, self.messages[1], 7)
 
     def draw(self):
         pyxel.cls(0)
@@ -274,6 +312,7 @@ class App:
         pyxel.text(4, 4, score, 7)
         pyxel.text(71, 4, enem_count, 1)
         pyxel.text(70, 4, enem_count, 7)
+        self.draw_message_bar()
         if self.pause and self.alive:
             # paused, don't worry
             pyxel.stop()
