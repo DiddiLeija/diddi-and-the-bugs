@@ -171,7 +171,8 @@ class App:
                 pyxel.playm(0, loop=True)
             else:
                 self.pause = True
-        if pyxel.btnr(pyxel.KEY_P):
+        if pyxel.btnr(pyxel.KEY_P) and self.alive:
+            # We have just raised a "pause event", so we should say it
             self.add_message("Game paused" if self.pause else "Game resumed", True)
         if pyxel.btnr(pyxel.KEY_R):
             self.add_message("Re-started the game", True)
@@ -191,7 +192,7 @@ class App:
                 if pyxel.frame_count % self.continous_bullets_spacing == 0:
                     if not self.continous_bullets_message:
                         self.add_message("Ah! Continous bullets!")
-                    self.continous_bullets_message = True
+                        self.continous_bullets_message = True
                     self.bullet_list.append(
                         Bullet(self.player_x + 9, self.player_y + 3, True)
                     )
@@ -221,6 +222,7 @@ class App:
             pyxel.stop()
             pyxel.playm(2)
             self.already_won = True
+            self.add_message("Yay! We won!")
 
         if self.bullet_last_num_frame >= self.continous_bullets_delay:
             self.bullet_last_num_frame = 0
@@ -253,6 +255,7 @@ class App:
                         self.alive = False
                         pyxel.stop()
                         pyxel.playm(1)
+                        self.add_message("Oh no! We loose!")
                 else:
                     self.score += 10
                     self.enemies.pop(enem)
@@ -274,6 +277,7 @@ class App:
                         self.alive = False
                         pyxel.stop()
                         pyxel.playm(1)
+                        self.add_message("Oh no! We loose!")
                 else:
                     self.score += random.choice([50, 100, 200])
                     self.trash.pop(item)
