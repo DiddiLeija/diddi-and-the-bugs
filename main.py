@@ -131,8 +131,13 @@ class App:
         # we are keeping a message record until
         # the app quits.
         self.messages = []
-        
-        self.message_goodies = ["Woo hoo!", "Let's save the Earth!", "Find the 'easter eggs'!", "Willpower to Earth, can you hear me?"]
+
+        self.message_goodies = [
+            "Woo hoo!",
+            "Let's save the Earth!",
+            "Find the 'easter eggs'!",
+            "Willpower to Earth, can you hear me?",
+        ]
 
         self.reset()
 
