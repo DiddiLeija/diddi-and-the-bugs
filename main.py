@@ -289,7 +289,7 @@ class App:
 
     def draw_message_bar(self):
         # This will draw the messages bar.
-        pyxel.rect(0, pyxel.height - 20, pyxel.width, 20, 3)
+        pyxel.rect(0, pyxel.height - 20, pyxel.width, 20, 5)
         pyxel.rect(0, pyxel.height - 20, pyxel.width, 2, 13)
 
         # Draw the messages
