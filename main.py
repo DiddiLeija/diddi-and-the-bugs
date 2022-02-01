@@ -137,6 +137,10 @@ class App:
             "Let's save the Earth!",
             "Find the 'easter eggs'!",
             "Willpower to Earth, can you hear me?",
+            "Hang tight...",
+            "I'm hungry, aren't you?",
+            "It's cold here, don't you think?",
+            "Wow! This spacecraft really moves!",
         ]
 
         self.reset()
