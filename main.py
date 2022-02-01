@@ -127,7 +127,14 @@ class App:
     "The main piece of the game. It also operates the starfighter."
 
     def __init__(self):
+        # This variable is not on `reset`, because
+        # we are keeping a message record until
+        # the app quits.
+        self.messages = []
+
         self.reset()
+
+        self.add_message("Let's go!")
 
         pyxel.run(self.update, self.draw)
 
@@ -143,6 +150,7 @@ class App:
         self.bullet_list = []
         self.continous_bullets_delay = 30
         self.continous_bullets_spacing = 2
+        self.continous_bullets_message = False
         self.bullet_last_num_frame = 0
         self.bullet_last_held_long = False
         self.enemies = [Enemy() for sth in range(200)]
@@ -163,6 +171,10 @@ class App:
                 pyxel.playm(0, loop=True)
             else:
                 self.pause = True
+        if pyxel.btnr(pyxel.KEY_P):
+            self.add_message("Game paused" if self.pause else "Game resumed", True)
+        if pyxel.btnr(pyxel.KEY_R):
+            self.add_message("Re-started the game", True)
         if self.pause and self.alive:
             return None
         if not self.alive or self.already_won:
@@ -177,6 +189,9 @@ class App:
             self.bullet_last_num_frame += 1
             if self.bullet_last_held_long:
                 if pyxel.frame_count % self.continous_bullets_spacing == 0:
+                    if not self.continous_bullets_message:
+                        self.add_message("Ah! Continous bullets!")
+                    self.continous_bullets_message = True
                     self.bullet_list.append(
                         Bullet(self.player_x + 9, self.player_y + 3, True)
                     )
@@ -186,6 +201,7 @@ class App:
             # Reset continous bullets back if space key is released
             self.bullet_last_num_frame = 0
             self.bullet_last_held_long = False
+            self.continous_bullets_message = False
         for bullet in self.bullet_list:
             if bullet.alive:
                 bullet.update()
@@ -266,10 +282,23 @@ class App:
             # just like the enemies, this will just pass
             pass
 
+    def add_message(self, msg, system=False):
+        self.messages.append(f"{'Diddi' if not system else 'System'}: {msg}")
+        if len(self.messages) >= 3:
+            self.messages.pop(0)
+
     def draw_message_bar(self):
         # This will draw the messages bar.
-        pyxel.rect(0, pyxel.height - 20, pyxel.width, 20, 1)
+        pyxel.rect(0, pyxel.height - 20, pyxel.width, 20, 3)
         pyxel.rect(0, pyxel.height - 20, pyxel.width, 2, 13)
+
+        # Draw the messages
+        if len(self.messages) > 0:
+            pyxel.text(1, pyxel.height - 17, self.messages[0], 1)
+            pyxel.text(2, pyxel.height - 17, self.messages[0], 7)
+        if len(self.messages) > 1:
+            pyxel.text(1, pyxel.height - 8, self.messages[1], 1)
+            pyxel.text(2, pyxel.height - 8, self.messages[1], 7)
 
     def draw(self):
         pyxel.cls(0)
