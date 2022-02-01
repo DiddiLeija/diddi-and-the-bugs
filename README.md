@@ -1,6 +1,6 @@
 # Diddi and the Bugs
 
-My Game Off 2021 game.
+My Game Off 2021 entry.
 
 ## Introduction
 
@@ -19,7 +19,7 @@ My Game Off 2021 game.
 ## Installation
 
 Since the GameOff 2021 event is hosted by [itch.io](https://itch.io), the distributions are available there. The source
-code lives in the GitHub repository, but the Python game is also available at itch.io.
+code lives in this GitHub repository, but the stable distributions are available at itch.io.
 
 The itch.io page for my game is here: https://diddileija.itch.io/diddi-and-the-bugs.
 
@@ -39,8 +39,8 @@ Read the [game guide](https://github.com/DiddiLeija/diddi-and-the-bugs/blob/main
 
 ## Game engine
 
-I am planning to build this game using [Pyxel](https://github.com/kitao/pyxel), a Python tool for retro games. I will upload the complete code,
-assets and other useful stuff on this repo. The executables must be available at the itch.io page.
+This game is made using [Pyxel](https://github.com/kitao/pyxel), a Python tool for retro games. The executables are uploaded to the itch.io page manually
+each time a tag (release) is published here.
 
 ## Contributing
 
