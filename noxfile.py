@@ -36,15 +36,15 @@ def create_packages(session):
     session.install("-r", "requirements.txt")
     # Look for the 'dist' path, that will store everything
     session.warn("Looking for the destination path...")
-    dist_generation = "import os; os.mkdirs('./dist')"
+    dist_generation = "import os; os.mkdir('./dist')"
     if os.path.exists("./dist"):
         if not input(
             "The destination directory ('./dist') already exists. Do you want to remove it? (y/n)"
-        ).strip().lower() not in ("y", "yes"):
+        ).strip().lower() in ("y", "yes"):
             session.warn("Aborting...")
             quit()
         dist_generation = (
-            "import os, shutil; shutil.rmtree('./dist'); os.mkdirs('./dist')"
+            "import os, shutil; shutil.rmtree('./dist'); os.mkdir('./dist')"
         )
     session.run("python", "-c", dist_generation)
     # Zip the source code
@@ -66,11 +66,13 @@ def create_packages(session):
     )
     # Generate and zip the Pyxel executable
     session.warn("Generating the Pyxel executable...")
-    session.run("pyxel", "package", "./dist/", "./dist/main.py")
+    session.cd("dist")
+    session.run("pyxel", "package", ".", "main.py")
+    session.cd("..")
     session.run(
         "python",
         "-c",
-        "import os; os.rename('./dist/main.pyxapp', './dist/pyxel_dist.pyxapp')",
+        "import os; os.rename('./dist/..pyxapp', './dist/pyxel_dist.pyxapp')",
     )
     session.run(
         "python",
