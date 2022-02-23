@@ -26,7 +26,7 @@ if sys.platform != "win32":
     sys.exit(
         f"Error: Expected platform 'win32' for running this script, but got {sys.platform}"
     )
-elif EXPECTED_PYTHON < sys.version_info:
+elif EXPECTED_PYTHON > sys.version_info:
     sys.exit(f"Error: Expected Python >= {EXPECTED_PYTHON}, but got {sys.version_info}")
 
 

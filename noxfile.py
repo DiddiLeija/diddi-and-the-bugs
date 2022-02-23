@@ -39,7 +39,7 @@ def create_packages(session):
     dist_generation = "import os; os.mkdir('./dist')"
     if os.path.exists("./dist"):
         if not input(
-            "The destination directory ('./dist') already exists. Do you want to remove it? (y/n)"
+            "The destination directory ('./dist') already exists. Do you want to remove it? (y/n) "
         ).strip().lower() in ("y", "yes"):
             session.warn("Aborting...")
             quit()
@@ -93,8 +93,10 @@ def create_packages(session):
     session.run(
         "python",
         "-c",
-        "import os, shutil; os.remove('./dist/main.py'); os.remove('./dist/resource.pyxres'); "
-        "if os.path.exists('./build'): shutil.rmtree('./build')",
+        "import os; os.remove('./dist/main.py'); os.remove('./dist/resource.pyxres'); "
+        "os.remove('./dist/pyxel_dist.pyxapp')",
     )
+    if os.path.exists("./build"):
+        session.run("python", "-c", "import shutil; shutil.rmtree('./build')")
     # Send a success message
     session.warn("All done! The contents are ready at './dist'.")
