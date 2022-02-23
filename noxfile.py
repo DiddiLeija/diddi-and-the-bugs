@@ -3,10 +3,11 @@ I use Nox here to reformat the code.
 """
 
 import os
+import sys
 
 import nox
 
-nox.options.sessions = ["keep_codebase_clean", "check_quality"]
+nox.options.sessions = ["keep-codebase-clean", "check-quality"]
 
 files = ["noxfile.py", "main.py", "setup.py"]
 
@@ -37,20 +38,48 @@ def create_packages(session):
     session.warn("Looking for the destination path...")
     dist_generation = "import os; os.mkdirs('./dist')"
     if os.path.exists("./dist"):
-        if not input("The destination directory ('./dist') already exists. Do you want to remove it? (y/n)").strip().lower() not in ("y", "yes"):
+        if not input(
+            "The destination directory ('./dist') already exists. Do you want to remove it? (y/n)"
+        ).strip().lower() not in ("y", "yes"):
             session.warn("Aborting...")
             quit()
-        dist_generation = "import os, shutil; shutil.rmtree('./dist'); os.mkdirs('./dist')"
+        dist_generation = (
+            "import os, shutil; shutil.rmtree('./dist'); os.mkdirs('./dist')"
+        )
     session.run("python", "-c", dist_generation)
     # Zip the source code
     session.warn("Generating the source code distribution...")
-    session.run("python", "-c", "import os, shutil; shutil.copy('main.py', './dist/main.py'); shutil.copy('resource.pyxres', './dist/resource.pyxres')")
-    session.run("python", "-m", "zipfile", "-c", "./dist/source.zip", "./dist/main.py", "./dist/resource.pyxres")
+    session.run(
+        "python",
+        "-c",
+        "import os, shutil; shutil.copy('main.py', './dist/main.py'); "
+        "shutil.copy('resource.pyxres', './dist/resource.pyxres')",
+    )
+    session.run(
+        "python",
+        "-m",
+        "zipfile",
+        "-c",
+        "./dist/source.zip",
+        "./dist/main.py",
+        "./dist/resource.pyxres",
+    )
     # Generate and zip the Pyxel executable
     session.warn("Generating the Pyxel executable...")
     session.run("pyxel", "package", "./dist/", "./dist/main.py")
-    session.run("python", "-c", "import os; os.rename('./dist/main.pyxapp', './dist/pyxel_dist.pyxapp')")
-    session.run("python", "-m", "zipfile", "-c", "./dist/pyxel_dist.zip", "./dist/pyxel_dist.pyxapp")
+    session.run(
+        "python",
+        "-c",
+        "import os; os.rename('./dist/main.pyxapp', './dist/pyxel_dist.pyxapp')",
+    )
+    session.run(
+        "python",
+        "-m",
+        "zipfile",
+        "-c",
+        "./dist/pyxel_dist.zip",
+        "./dist/pyxel_dist.pyxapp",
+    )
     # If Windows, create the cx_Freeze executable
     if sys.platform == "win32":
         session.warn("Running in Windows, generating the cx_Freeze executable...")
@@ -59,6 +88,11 @@ def create_packages(session):
         session.run("python", "-m", "zipfile", "-c", "./dist/windows.zip", "./build")
     # Before closing, it's cleanup time!
     session.warn("Cleaning up the excedents...")
-    session.run("python", "-c", "import os, shutil; os.remove('./dist/main.py'); os.remove('./dist/resource.pyxres'); if os.path.exists('./build'): shutil.rmtree('./build')")
+    session.run(
+        "python",
+        "-c",
+        "import os, shutil; os.remove('./dist/main.py'); os.remove('./dist/resource.pyxres'); "
+        "if os.path.exists('./build'): shutil.rmtree('./build')",
+    )
     # Send a success message
     session.warn("All done! The contents are ready at './dist'.")
