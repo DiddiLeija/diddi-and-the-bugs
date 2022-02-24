@@ -30,6 +30,14 @@ If you don't find what you expected, feel free to open an issue on GitHub or com
 
 If you will use Python get sure to have **Python >= 3.7**.
 
+### Building the zipped distributions by yourself
+
+_New since 2.0.0_.
+
+If you have a local clone of this repo, you can build the zipped distributions (that can be found at a `dist` directory). If you
+have [Nox](https://nox.thea.codes) and the Python required version (see above), run `nox -s create-packages`. It will run a lot
+of commands to generate the source zip, the Pyxel executable and the Windows executable (if running under Windows).
+
 ## How to win
 
 Use the energized serum to destroy **200 bugs** and win! In the meantime, you can earn extra points
