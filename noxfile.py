@@ -1,5 +1,6 @@
 """
-I use Nox here to reformat the code.
+I use Nox here to reformat the code, check
+the code quality, and build the zipped distributions.
 """
 
 import os
@@ -87,6 +88,12 @@ def create_packages(session):
         session.warn("Running in Windows, generating the cx_Freeze executable...")
         session.install("cx_Freeze")
         session.run("python", "setup.py", "build")
+        session.run(
+            "python",
+            "-c",
+            "import os, shutil; exe_path = os.listdir('./build')[0]; "
+            "shutil.copy2('resource.pyxres', f'./build/{exe_path}/resource.pyxres')",
+        )
         session.run("python", "-m", "zipfile", "-c", "./dist/windows.zip", "./build")
     # Before closing, it's cleanup time!
     session.warn("Cleaning up the excedents...")
