@@ -123,6 +123,10 @@ class Trash(Enemy):
         self.show = False
 
 
+class Monster(Enemy):
+    "A giant enemy that, if destroyed, generates 1000 extra points!"
+
+
 class App:
     "The main piece of the game. It also operates the starfighter."
 
