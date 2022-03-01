@@ -372,8 +372,8 @@ class App:
                 self.score += 1000
                 self.monster = DeadMonster()
                 pyxel.playm(4)
-                self.add_message("Oh my! We killed a monster!")
-                self.add_message("The monster gave us extra points!")
+                self.add_message("Oh my! We killed the Monster!")
+                self.add_message("The Monster gave us extra points!")
         except Exception:
             pass
 
