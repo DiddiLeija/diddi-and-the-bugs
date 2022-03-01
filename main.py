@@ -371,7 +371,7 @@ class App:
             elif self.monster.available and self.monster.x > 2:
                 self.score += 1000
                 self.monster = DeadMonster()
-                pyxel.playm(4)
+                pyxel.playm(5)
                 self.add_message("Oh my! We killed the Monster!")
                 self.add_message("The Monster gave us extra points!")
         except Exception:
