@@ -67,6 +67,8 @@ class Enemy:
         self.speed = random.randint(1, self.max_speed)
         self.alive = True
         self.show = False
+        self.size = 8
+        self.recycle = True
 
     def try_to_activate(self, possibilities):
         if possibilities > 100:
@@ -83,10 +85,13 @@ class Enemy:
             return None
         self.x -= self.speed
         if self.x == 0:
-            self.aspect = random.choice(self.possible_enemies)
-            self.x = pyxel.width
-            self.y = random.randint(10, pyxel.height - 28)
-            self.speed = random.randint(1, self.max_speed)
+            if self.recycle:
+                self.aspect = random.choice(self.possible_enemies)
+                self.x = pyxel.width
+                self.y = random.randint(10, pyxel.height - 28)
+                self.speed = random.randint(1, self.max_speed)
+            else:
+                self.alive = False
             self.show = False
         for bullet in bullets:
             if (
@@ -101,7 +106,16 @@ class Enemy:
         if not self.show:
             return None
         if self.alive:
-            pyxel.blt(self.x, self.y, 0, self.aspect[0], self.aspect[1], 8, 8, 0)
+            pyxel.blt(
+                self.x,
+                self.y,
+                0,
+                self.aspect[0],
+                self.aspect[1],
+                self.size,
+                self.size,
+                0,
+            )
 
 
 class Trash(Enemy):
@@ -121,10 +135,47 @@ class Trash(Enemy):
         self.speed = random.randint(1, self.max_speed)
         self.alive = True
         self.show = False
+        self.size = 8
+        self.recycle = True
 
 
 class Monster(Enemy):
     "A giant enemy that, if destroyed, generates 1000 extra points!"
+
+    def __init__(self):
+        # override all these stuff,
+        # which heavily customizes the behavior
+        self.possible_enemies = [(48, 0)]
+        self.aspect = self.possible_enemies[
+            0
+        ]  # there's only one aspect, no need to choose
+        self.x = pyxel.width
+        self.y = random.randint(10, pyxel.height - 28)
+        self.max_speed = 6  # it can move *really* fast, or maybe not!
+        self.speed = random.randint(1, self.max_speed)
+        self.alive = True
+        self.show = False
+        self.size = 16  # 16p per side, 4x4 blocks in the Pyxel editor
+        self.recycle = False  # don't regenerate after reaching x=0
+        self.available = (
+            True  # this unique attribute will make the difference from the dead monster
+        )
+
+
+class DeadMonster(Monster):
+    "Just like the monster, but with no activity enabled."
+
+    def __init__(self):
+        Monster.__init__(self)
+        self.alive = False
+        self.show = False
+        self.available = False  # not available to play!
+
+    def update(self, bullets):
+        pass
+
+    def draw(self):
+        pass
 
 
 class App:
@@ -171,6 +222,7 @@ class App:
         self.enemies = [Enemy() for sth in range(200)]
         self.trash = [Trash() for sth in range(50)]
         self.score = 0
+        self.monster = Monster()  # this guy is outside the other enemies
 
         pyxel.stop()
         pyxel.playm(0, loop=True)
@@ -229,9 +281,11 @@ class App:
             enem.try_to_activate(len(self.enemies))
         for trash in self.trash:
             trash.try_to_activate(101)
+        self.monster.try_to_activate(200)
 
         self.add_enemies()
         self.add_trash()
+        self.add_monster()
         self.move_spacecraft()
 
         if len(self.enemies) < 1 and self.alive and not self.already_won:
@@ -303,6 +357,24 @@ class App:
             # just like the enemies, this will just pass
             pass
 
+    def add_monster(self):
+        try:
+            if self.monster.alive and self.monster.available:
+                self.monster.update(self.bullet_list)
+                if self.player_x in range(
+                    self.monster.x - 1, self.monster.x + 17
+                ) and self.player_y in range(self.monster.y - 1, self.monster.y + 17):
+                    self.alive = False
+                    pyxel.stop()
+                    pyxel.playm(1)
+                    self.add_message("Oh no! We loose!")
+            elif self.monster.available and self.monster.x > 2:
+                self.score += 1000
+                self.monster = DeadMonster()
+                pyxel.playm(4)
+        except Exception:
+            pass
+
     def add_message(self, msg, system=False):
         self.messages.append(f"{'Diddi' if not system else 'System'}: {msg}")
         if len(self.messages) >= 3:
@@ -368,6 +440,7 @@ class App:
                 enem.draw()
             for trash in self.trash:
                 trash.draw()
+            self.monster.draw()
         else:
             # you loose! try again
             pyxel.text(
