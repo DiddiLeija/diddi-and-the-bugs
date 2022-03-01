@@ -75,3 +75,17 @@ _New in version 2.0.0._
 
 This is the "event log". Here, you can notified by both Diddi or the "System" when something happens. For example, when you pause or
 restart the game. Also, if you find one of our "easter eggs", you'll get notified too!
+
+### The Monster
+
+![image](https://user-images.githubusercontent.com/83621221/156233024-c36211fb-1cd3-4c73-a791-98230a593239.png)
+
+_New in version 2.0.0._
+
+This strange but giant enemy **only appears once**. It can move even
+faster than the bullets, but also move slowly. It uses 16x16 pixels
+(normal enemies have 8x8 pixels).
+
+If destroyed, the Monster will leave **1000 extra points**! However, if it
+crosses the screen without being defeated, it won't appear again and won't
+leave any points.
