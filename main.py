@@ -298,7 +298,7 @@ class App:
             enem.try_to_activate(len(self.enemies))
         for trash in self.trash:
             trash.try_to_activate(101)
-        self.monster.try_to_activate(1)
+        self.monster.try_to_activate(202)
 
         self.add_enemies()
         self.add_trash()
