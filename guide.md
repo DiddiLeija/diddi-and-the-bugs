@@ -61,7 +61,7 @@ The idea is to **destroy 200 bugs**.
 
 ![image](https://user-images.githubusercontent.com/83621221/143620527-31f0797f-c219-4426-8a75-fef7bc30bbb8.png)
 ![image](https://user-images.githubusercontent.com/83621221/143620539-57b2df7a-5d4e-494e-9082-4e6a45be868f.png)
-![image](https://user-images.githubusercontent.com/83621221/143620562-d544305d-d94e-4539-8ba1-70552b88e864.png)
+![image](https://user-images.githubusercontent.com/83621221/156434818-d07df34d-e2ce-46c9-9226-81327a8bd75b.png)
 
 Unfortunately, our loveful Earth's atmosphere is filled up with trash. But you
 can help to destroy them using bullets. If you destroy one, you can earn
