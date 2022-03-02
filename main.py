@@ -94,11 +94,7 @@ class Enemy:
                 self.alive = False
             self.show = False
         for bullet in bullets:
-            if (
-                self.x in range(bullet.x - 5, bullet.x + bullet.w + 5)
-                and self.y in range(bullet.y - 5, bullet.y + bullet.h + 5)
-                and bullet.alive
-            ):
+            if self.bullet_collision(bullet):
                 self.alive = False
                 bullet.alive = False
 
@@ -116,6 +112,13 @@ class Enemy:
                 self.size,
                 0,
             )
+
+    def bullet_collision(self, bullet):
+        return (
+            self.x in range(bullet.x - 5, bullet.x + bullet.w + 5)
+            and self.y in range(bullet.y - 5, bullet.y + bullet.h + 5)
+            and bullet.alive
+        )
 
 
 class Trash(Enemy):
@@ -159,6 +162,20 @@ class Monster(Enemy):
         self.recycle = False  # don't regenerate after reaching x=0
         self.available = (
             True  # this unique attribute will make the difference from the dead monster
+        )
+
+    def bullet_collision(self, bullet):
+        # Adapt the bullet collision logic, so any
+        # bullet that hits the monster's space will
+        # raise a collision, instead of just passing
+        return (
+            self.x in range(bullet.x - 5, bullet.x + bullet.w + 5)
+            and (
+                self.y in range(bullet.y - 15, bullet.y + bullet.h + 15)
+                if self.y <= (bullet.y + 2) and bullet.y <= (self.y + 17)
+                else False
+            )
+            and bullet.alive
         )
 
 
@@ -281,7 +298,7 @@ class App:
             enem.try_to_activate(len(self.enemies))
         for trash in self.trash:
             trash.try_to_activate(101)
-        self.monster.try_to_activate(200)
+        self.monster.try_to_activate(1)
 
         self.add_enemies()
         self.add_trash()
