@@ -1,5 +1,7 @@
 # Diddi and the Bugs
 
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/G2G3AL6D6)
+
 My Game Off 2021 entry.
 
 ## Introduction
