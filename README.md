@@ -55,3 +55,8 @@ each time a tag (release) is published here.
 ## Contributing
 
 Read [this contributing guidelines](https://github.com/DiddiLeija/diddi-and-the-bugs/blob/main/CONTRIBUTING.md) for full details.
+
+## Discord server
+
+There's a Discord server where you can ask and share stuff related to Diddi and The Bugs! Check out https://github.com/DiddiLeija/diddi-and-the-bugs/issues/45
+for full details.
