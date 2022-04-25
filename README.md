@@ -36,9 +36,12 @@ If you will use Python get sure to have **Python >= 3.7**.
 
 _New since 2.0.0_.
 
-If you have a local clone of this repo, you can build the zipped distributions (that can be found at a `dist` directory). If you
-have [Nox](https://nox.thea.codes) and the Python required version (see above), run `nox -s create-packages`. It will run a lot
-of commands to generate the source zip, the Pyxel executable and the Windows executable (if running under Windows).
+If you have a local clone of this repo, you can build the zipped distributions (those that we distribute on itch.io),
+If you have [Nox](https://nox.thea.codes) and the Python required version (see above), run `nox -s create-packages`. It will run a lot
+of commands to generate the source zip, the Pyxel executable and the Windows executable (if running under Windows). The final
+contents will be found on a `dist` folder [^1].
+
+[^1]: This folder is ignored by Git, so it's not shown on GitHub.
 
 ## How to win
 
@@ -56,7 +59,13 @@ each time a tag (release) is published here.
 
 Read [this contributing guidelines](https://github.com/DiddiLeija/diddi-and-the-bugs/blob/main/CONTRIBUTING.md) for full details.
 
-## Discord server
+## More resources
+
+### Discord server
 
 There's a Discord server where you can ask and share stuff related to Diddi and The Bugs! Check out https://github.com/DiddiLeija/diddi-and-the-bugs/issues/45
 for full details.
+
+### Wiki
+
+We have a wiki to keep some tips, records, and that stuff. It can be found [at the GitHub repo's wiki](https://github.com/DiddiLeija/diddi-and-the-bugs/wiki).
