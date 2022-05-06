@@ -41,8 +41,6 @@ If you have [Nox](https://nox.thea.codes) and the Python required version (see a
 of commands to generate the source zip, the Pyxel executable and the Windows executable (if running under Windows). The final
 contents will be found on a `dist` folder [^1].
 
-[^1]: This folder is ignored by Git, so it's not shown on GitHub.
-
 ## How to win
 
 Use the energized serum to destroy **200 bugs** and win! In the meantime, you can earn extra points
@@ -69,3 +67,5 @@ for full details.
 ### Wiki
 
 We have a wiki to keep some tips, records, and that stuff. It can be found [at the GitHub repo's wiki](https://github.com/DiddiLeija/diddi-and-the-bugs/wiki).
+
+[^1]: Contributor's advice: This folder is ignored by Git, so it won't be shown on GitHub.
