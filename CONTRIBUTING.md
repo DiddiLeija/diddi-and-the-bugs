@@ -18,7 +18,7 @@ sending a pull request, so we can discuss your idea first.
 If you have a fork of [this game's repository](https://github.com/DiddiLeija/diddi-and-the-bugs), and you have
 installed Git, you can clone it locally by running this command:
 
-```
+```sh
 git clone https://github.com/[your-username]/diddi-and-the-bugs
 cd diddi-and-the-bugs
 ```
@@ -29,8 +29,8 @@ After that, you can open branches, push commits... that's up to you.
 
 You will need some additional stuff before getting started:
 
-- [Python](https://python.org) (3.7 or higher)
-- [Nox](https://nox.thea.codes), for running linters and formatters
+- [Python](https://python.org) (version 3.7 or higher)
+- [Nox](https://nox.thea.codes), for running linters and formatters, and some other useful commands we've set up
 - [Pyxel](https://github.com/kitao/pyxel) (you can both install the `requirements.txt` file,
   or the version pinned on that file using [this instructions](https://github.com/kitao/pyxel#how-to-install))
 
@@ -39,13 +39,21 @@ Also, you may want to set up a virtual environment for installing the packages (
 ### Run linters and checks
 
 We use [black](https://github.com/psf/black), [isort](https://github.com/PyCQA/isort) and [flake8](https://github.com/PyCQA/flake8) for keeping
-things civilized. On GitHub, the CI (Continous Integration) will do it for you. But in a local clone, you can use Nox for this.
+the code quality civilized. On GitHub, the CI (Continous Integration) will do it for you. But in a local clone, you can use Nox for this.
 
 Just run this command in the root directory of the repository:
 
-```
+```sh
 nox
 ```
 
 This will run formatters, and then the linters. Most of the issues should be resolved by the formatters, but you may find issues when linting. You
 can run Nox as many times as you need.
+
+### Building the zipped distribution by yourself
+
+Since version 2.0.0, you can get these distributions at a `dist/` folder. To generate them, run this command with Nox:
+
+```sh
+nox -s create-packages
+```
