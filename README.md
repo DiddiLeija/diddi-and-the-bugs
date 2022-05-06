@@ -25,8 +25,8 @@ code lives in this GitHub repository, but the stable distributions are available
 
 The itch.io page for my game is here: https://diddileija.itch.io/diddi-and-the-bugs.
 
-Once you are there, read the installation instructions and find a stand-alone executable for you (or try the Python edition).
-If you don't find what you expected, feel free to open an issue on GitHub or comment in the itch.io page.
+Once you are there, read the installation instructions and find the right distribution for you.
+If you don't find what you expected, feel free to open an issue on GitHub (or comment in the itch.io page).
 
 ### Python version
 
