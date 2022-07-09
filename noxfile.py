@@ -95,6 +95,9 @@ def create_packages(session):
             "shutil.copy2('resource.pyxres', f'./build/{exe_path}/resource.pyxres')",
         )
         session.run("python", "-m", "zipfile", "-c", "./dist/windows.zip", "./build")
+    else:
+        # It's polite to notify when a step is ignored... well, that's what I think.
+        session.warn("Not running in Windows, ignoring the cx_Freeze executable build...")
     # Before closing, it's cleanup time!
     session.warn("Cleaning up the excedents...")
     session.run(
