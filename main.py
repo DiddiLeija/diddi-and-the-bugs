@@ -215,11 +215,13 @@ class App:
             "Wow! This spacecraft really moves!",
         ]
 
+        self.on_menu = True  # variable to show the menu
+
         self.reset()
 
         self.add_message("Let's go!")
 
-        pyxel.run(self.update, self.draw)
+        self.startup()
 
     def reset(self):
         pyxel.load("resource.pyxres")
@@ -244,7 +246,14 @@ class App:
         pyxel.stop()
         pyxel.playm(0, loop=True)
 
-    def update(self):
+    def startup(self):
+        if self.on_menu:
+            # pyxel.run(self.update_menu, self.draw_menu)
+            pass
+        else:
+            pyxel.run(self.update_game, self.draw_game)
+
+    def update_game(self):
         if pyxel.btnp(pyxel.KEY_Q):
             pyxel.quit()
         if pyxel.btnp(pyxel.KEY_R):
@@ -412,7 +421,7 @@ class App:
             pyxel.text(1, pyxel.height - 8, self.messages[1], 1)
             pyxel.text(2, pyxel.height - 8, self.messages[1], 7)
 
-    def draw(self):
+    def draw_game(self):
         pyxel.cls(0)
         score = f"Score: {self.score}"
         enem_count = f"Enemies: {len(self.enemies)}"
