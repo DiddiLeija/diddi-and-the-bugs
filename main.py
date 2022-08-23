@@ -221,7 +221,7 @@ class App:
 
         self.add_message("Let's go!")
 
-        self.startup()
+        self.startup(True)
 
     def reset(self):
         pyxel.load("resource.pyxres")
@@ -246,9 +246,11 @@ class App:
         pyxel.stop()
         pyxel.playm(0, loop=True)
 
-    def startup(self):
+    def startup(self, should_reset=False):
+        if should_reset:
+            self.reset()
         if self.on_menu:
-            # pyxel.run(self.update_menu, self.draw_menu)
+            pyxel.run(self.update_menu, self.draw_menu)
             pass
         else:
             pyxel.run(self.update_game, self.draw_game)
@@ -257,7 +259,8 @@ class App:
         if pyxel.btnp(pyxel.KEY_Q):
             pyxel.quit()
         if pyxel.btnp(pyxel.KEY_R):
-            self.reset()
+            self.on_menu = True
+            self.startup()
         if pyxel.btnp(pyxel.KEY_P):
             if self.pause:
                 self.pause = False
@@ -477,6 +480,25 @@ class App:
             pyxel.text(
                 20, 50, "Oh no! :( Press R to restart\n or press Q to quit the game", 7
             )
+
+    def update_menu(self):
+        if pyxel.btnp(pyxel.KEY_Q):
+            pyxel.quit()
+        if pyxel.btnp(pyxel.KEY_1):
+            # Option 1 -- Start the game
+            self.on_menu = False
+            self.reset()
+
+    def draw_menu(self):
+        # Draw the screen
+        pyxel.cls(0)
+        pyxel.rectb(20, 20, pyxel.width - 40, pyxel.height - 40, 7)
+        # Intro text
+        pyxel.text(26, 25, "=== Diddi and the Bugs ===", 1)
+        pyxel.text(25, 25, "=== Diddi and the Bugs ===", 7)
+        # Option 1
+        pyxel.text(26, 35, "[1] Start game", 1)
+        pyxel.text(25, 35, "[1] Start game", 7)
 
 
 App()
