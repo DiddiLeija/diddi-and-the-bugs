@@ -248,6 +248,7 @@ class App:
         self.menu_monster = Monster()
 
         pyxel.stop()
+        pyxel.playm(6, loop=True)
 
     def startup(self):
         if self.on_menu:
