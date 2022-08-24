@@ -204,6 +204,8 @@ class App:
         # the app quits.
         self.messages = []
 
+        pyxel.load("resource.pyxres")
+
         self.message_goodies = [
             "Woo hoo!",
             "Let's save the Earth!",
@@ -217,15 +219,9 @@ class App:
 
         self.on_menu = True  # variable to show the menu
 
-        self.reset()
+        self.startup()
 
-        self.add_message("Let's go!")
-
-        self.startup(True)
-
-    def reset(self):
-        pyxel.load("resource.pyxres")
-
+    def reset_game(self):
         self.alive = True  # the player is still alive
         self.already_won = False
         self.pause = False
@@ -246,13 +242,20 @@ class App:
         pyxel.stop()
         pyxel.playm(0, loop=True)
 
-    def startup(self, should_reset=False):
-        if should_reset:
-            self.reset()
+    def reset_menu(self):
+        self.menu_enemies = [Enemy() for sth in range(200)]
+        self.menu_trash = [Trash() for sth in range(50)]
+        self.menu_monster = Monster()
+
+        pyxel.stop()
+
+    def startup(self):
         if self.on_menu:
+            self.reset_menu()
             pyxel.run(self.update_menu, self.draw_menu)
-            pass
         else:
+            self.reset_game()
+            self.add_message("Let's go!")
             pyxel.run(self.update_game, self.draw_game)
 
     def update_game(self):
@@ -487,11 +490,41 @@ class App:
         if pyxel.btnp(pyxel.KEY_1):
             # Option 1 -- Start the game
             self.on_menu = False
-            self.reset()
+            self.startup()
+        # Try to activate the enemies, using
+        # the strategy that's used in the real game.
+        for enem in self.menu_enemies:
+            enem.try_to_activate(len(self.menu_enemies))
+        for trash in self.menu_trash:
+            trash.try_to_activate(101)
+        self.menu_monster.try_to_activate(202)
+        # Move the enemies behind the screen.
+        # These are shorter versions of add_monster(),
+        # add_trash() and add_enemies(). The use of
+        # self.bullet_list is replaced by an empty list.
+        try:
+            if self.menu_monster.alive and self.menu_monster.available:
+                self.menu_monster.update([])
+            for item in range(len(self.menu_trash)):
+                if self.menu_trash[item].alive:
+                    self.menu_trash[item].update([])
+            for item in range(len(self.menu_enemies)):
+                if self.menu_enemies[item].alive:
+                    self.menu_enemies[item].update([])
+        except Exception:
+            pass
 
     def draw_menu(self):
         # Draw the screen
         pyxel.cls(0)
+        # Draw the characters that play
+        for enem in self.menu_enemies:
+            enem.draw()
+        for trash in self.menu_trash:
+            trash.draw()
+        self.menu_monster.draw()
+        # Draw the rectangle that makes the menu
+        pyxel.rect(20, 20, pyxel.width - 40, pyxel.height - 40, 0)
         pyxel.rectb(20, 20, pyxel.width - 40, pyxel.height - 40, 7)
         # Intro text
         pyxel.text(26, 25, "=== Diddi and the Bugs ===", 1)
@@ -499,6 +532,9 @@ class App:
         # Option 1
         pyxel.text(26, 35, "[1] Start game", 1)
         pyxel.text(25, 35, "[1] Start game", 7)
+        # Quit option
+        pyxel.text(26, 105, "Press Q to quit", 1)
+        pyxel.text(25, 105, "Press Q to quit", 7)
 
 
 App()
