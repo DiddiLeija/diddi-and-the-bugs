@@ -524,9 +524,6 @@ class App:
         for trash in self.menu_trash:
             trash.draw()
         self.menu_monster.draw()
-        # Draw the rectangle that makes the menu
-        pyxel.rect(20, 20, pyxel.width - 40, pyxel.height - 40, 0)
-        pyxel.rectb(20, 20, pyxel.width - 40, pyxel.height - 40, 7)
         # Intro text
         pyxel.text(26, 25, "=== Diddi and the Bugs ===", 1)
         pyxel.text(25, 25, "=== Diddi and the Bugs ===", 7)
