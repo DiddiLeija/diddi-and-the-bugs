@@ -455,15 +455,15 @@ class App:
         elif len(self.enemies) < 1 and self.alive:
             # you won!!!
             pyxel.text(
-                21,
+                20,
                 50,
-                "You won! :) Press R to restart\n or press Q to quit the game",
+                " You won! :) Press R to return\n or press Q to quit the game",
                 1,
             )
             pyxel.text(
-                20,
+                19,
                 50,
-                "You won! :) Press R to restart\n or press Q to quit the game",
+                " You won! :) Press R to return\n or press Q to quit the game",
                 7,
             )
         elif self.alive:
@@ -479,10 +479,10 @@ class App:
         else:
             # you loose! try again
             pyxel.text(
-                21, 50, "Oh no! :( Press R to restart\n or press Q to quit the game", 1
+                20, 50, " Oh no! :( Press R to return \n or press Q to quit the game", 1
             )
             pyxel.text(
-                20, 50, "Oh no! :( Press R to restart\n or press Q to quit the game", 7
+                19, 50, " Oh no! :( Press R to return \n or press Q to quit the game", 7
             )
 
     def update_menu(self):
