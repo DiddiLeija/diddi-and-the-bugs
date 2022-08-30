@@ -247,6 +247,16 @@ class App:
         self.menu_trash = [Trash() for sth in range(50)]
         self.menu_monster = Monster()
 
+        self.menu_credits = False  # If True, display the credits
+
+        # This is the credits' text
+        self.credits_text = """This game was created by Diego Ramirez.\n
+This game is also possible thanks to
+other contributors, whose names can be found
+at github.com/DiddiLeija/diddi-and-the-bugs
+(look for the THANKS.txt file).
+        """
+
         pyxel.stop()
         pyxel.playm(6, loop=True)
 
@@ -492,6 +502,12 @@ class App:
             # Option 1 -- Start the game
             self.on_menu = False
             self.startup()
+        if not self.menu_credits and pyxel.btnp(pyxel.KEY_2):
+            # Option 2 -- Display credits
+            self.menu_credits = True
+        if self.menu_credits and pyxel.btnp(pyxel.KEY_SPACE):
+            # Escape from option 2
+            self.menu_credits = False
         # Try to activate the enemies, using
         # the strategy that's used in the real game.
         for enem in self.menu_enemies:
@@ -524,12 +540,27 @@ class App:
         for trash in self.menu_trash:
             trash.draw()
         self.menu_monster.draw()
-        # Intro text
-        pyxel.text(26, 25, "=== Diddi and the Bugs ===", 1)
-        pyxel.text(25, 25, "=== Diddi and the Bugs ===", 7)
-        # Option 1
-        pyxel.text(26, 35, "[1] Start game", 1)
-        pyxel.text(25, 35, "[1] Start game", 7)
+        if not self.menu_credits:
+            # Intro text
+            pyxel.text(26, 25, "=== Diddi and the Bugs ===", 1)
+            pyxel.text(25, 25, "=== Diddi and the Bugs ===", 7)
+            # Option 1
+            pyxel.text(26, 35, "[1] Start game", 1)
+            pyxel.text(25, 35, "[1] Start game", 7)
+            # Option 2
+            pyxel.text(26, 45, "[2] Credits", 1)
+            pyxel.text(25, 45, "[2] Credits", 7)
+        else:
+            # Show the credits...
+            # Intro text
+            pyxel.text(16, 25, "=== Credits of Diddi and the Bugs ===", 1)
+            pyxel.text(15, 25, "=== Credits of Diddi and the Bugs ===", 7)
+            # Credits text
+            pyxel.text(6, 35, self.credits_text, 1)
+            pyxel.text(5, 35, self.credits_text, 7)
+            # Escape option
+            pyxel.text(26, 95, "Press SPACE to return", 1)
+            pyxel.text(25, 95, "Press SPACE to return", 7)
         # Quit option
         pyxel.text(26, 105, "Press Q to quit", 1)
         pyxel.text(25, 105, "Press Q to quit", 7)
