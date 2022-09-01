@@ -7,20 +7,30 @@ Every game, book and story has a universe... and this game
 has a universe too! This guide explains how to get the greatest
 scores, and enjoy the game as best as you can.
 
+## The menu
+
+<!-- TODO: Add an image here! -->
+
+_New in version 3.0.0._
+
+This is the main menu. You can pick one of the following options:
+
+- **1**: Start the real game.
+
 ## Keys
 
 If you press some keys, some actions may happen.
 
-### General events keys
+### General event keys
 
 - **P**: Pause the game, saving scores and coordinates. If the game is paused,
-  press **P** again to keep playing.
+  press **P** again to keep playing [^1].
 - **Q**: Quit the game, and close the window.
-- **R**: Restart the game, and reset all the values (score, enemies).
+- **R**: Restart the game, and return to the menu [^1].
 
 ### Spacecraft (Willpower) keys
 
-- **Up / down keys**: Use them to move the Willpower, and avoid enemies. You can also use WASD (**W and S,** respectively)
+- **Up / down keys**: Use them to move the Willpower, and avoid enemies. You can also use WASD keys (**W and S,** to be more precise)
 - **Space**: Send a bullet of _L1-F3_ energized serum, that can destroy both bugs
   and trash!
 
@@ -89,3 +99,5 @@ faster than the bullets, but also move slowly. It uses 16x16 pixels
 If destroyed, the Monster will leave **1000 extra points**! However, if it
 crosses the screen without being defeated, it won't appear again and won't
 leave any points.
+
+[^1]: Does not apply in the main menu interface.

@@ -204,6 +204,8 @@ class App:
         # the app quits.
         self.messages = []
 
+        pyxel.load("resource.pyxres")
+
         self.message_goodies = [
             "Woo hoo!",
             "Let's save the Earth!",
@@ -215,15 +217,11 @@ class App:
             "Wow! This spacecraft really moves!",
         ]
 
-        self.reset()
+        self.on_menu = True  # variable to show the menu
 
-        self.add_message("Let's go!")
+        self.startup()
 
-        pyxel.run(self.update, self.draw)
-
-    def reset(self):
-        pyxel.load("resource.pyxres")
-
+    def reset_game(self):
         self.alive = True  # the player is still alive
         self.already_won = False
         self.pause = False
@@ -244,11 +242,39 @@ class App:
         pyxel.stop()
         pyxel.playm(0, loop=True)
 
-    def update(self):
+    def reset_menu(self):
+        self.menu_enemies = [Enemy() for sth in range(200)]
+        self.menu_trash = [Trash() for sth in range(50)]
+        self.menu_monster = Monster()
+
+        self.menu_credits = False  # If True, display the credits
+
+        # This is the credits' text
+        self.credits_text = """This game was created by Diego Ramirez.\n
+This game is also possible thanks to
+other contributors, whose names can be found
+at github.com/DiddiLeija/diddi-and-the-bugs
+(look for the THANKS.txt file).
+        """
+
+        pyxel.stop()
+        pyxel.playm(6, loop=True)
+
+    def startup(self):
+        if self.on_menu:
+            self.reset_menu()
+            pyxel.run(self.update_menu, self.draw_menu)
+        else:
+            self.reset_game()
+            self.add_message("Let's go!")
+            pyxel.run(self.update_game, self.draw_game)
+
+    def update_game(self):
         if pyxel.btnp(pyxel.KEY_Q):
             pyxel.quit()
         if pyxel.btnp(pyxel.KEY_R):
-            self.reset()
+            self.on_menu = True
+            self.startup()
         if pyxel.btnp(pyxel.KEY_P):
             if self.pause:
                 self.pause = False
@@ -412,7 +438,7 @@ class App:
             pyxel.text(1, pyxel.height - 8, self.messages[1], 1)
             pyxel.text(2, pyxel.height - 8, self.messages[1], 7)
 
-    def draw(self):
+    def draw_game(self):
         pyxel.cls(0)
         score = f"Score: {self.score}"
         enem_count = f"Enemies: {len(self.enemies)}"
@@ -439,15 +465,15 @@ class App:
         elif len(self.enemies) < 1 and self.alive:
             # you won!!!
             pyxel.text(
-                21,
+                20,
                 50,
-                "You won! :) Press R to restart\n or press Q to quit the game",
+                " You won! :) Press R to return\n or press Q to quit the game",
                 1,
             )
             pyxel.text(
-                20,
+                19,
                 50,
-                "You won! :) Press R to restart\n or press Q to quit the game",
+                " You won! :) Press R to return\n or press Q to quit the game",
                 7,
             )
         elif self.alive:
@@ -463,11 +489,81 @@ class App:
         else:
             # you loose! try again
             pyxel.text(
-                21, 50, "Oh no! :( Press R to restart\n or press Q to quit the game", 1
+                20, 50, " Oh no! :( Press R to return \n or press Q to quit the game", 1
             )
             pyxel.text(
-                20, 50, "Oh no! :( Press R to restart\n or press Q to quit the game", 7
+                19, 50, " Oh no! :( Press R to return \n or press Q to quit the game", 7
             )
+
+    def update_menu(self):
+        if pyxel.btnp(pyxel.KEY_Q):
+            pyxel.quit()
+        if pyxel.btnp(pyxel.KEY_1):
+            # Option 1 -- Start the game
+            self.on_menu = False
+            self.startup()
+        if not self.menu_credits and pyxel.btnp(pyxel.KEY_2):
+            # Option 2 -- Display credits
+            self.menu_credits = True
+        if self.menu_credits and pyxel.btnp(pyxel.KEY_SPACE):
+            # Escape from option 2
+            self.menu_credits = False
+        # Try to activate the enemies, using
+        # the strategy that's used in the real game.
+        for enem in self.menu_enemies:
+            enem.try_to_activate(len(self.menu_enemies))
+        for trash in self.menu_trash:
+            trash.try_to_activate(101)
+        self.menu_monster.try_to_activate(202)
+        # Move the enemies behind the screen.
+        # These are shorter versions of add_monster(),
+        # add_trash() and add_enemies(). The use of
+        # self.bullet_list is replaced by an empty list.
+        try:
+            if self.menu_monster.alive and self.menu_monster.available:
+                self.menu_monster.update([])
+            for item in range(len(self.menu_trash)):
+                if self.menu_trash[item].alive:
+                    self.menu_trash[item].update([])
+            for item in range(len(self.menu_enemies)):
+                if self.menu_enemies[item].alive:
+                    self.menu_enemies[item].update([])
+        except Exception:
+            pass
+
+    def draw_menu(self):
+        # Draw the screen
+        pyxel.cls(0)
+        # Draw the characters that play
+        for enem in self.menu_enemies:
+            enem.draw()
+        for trash in self.menu_trash:
+            trash.draw()
+        self.menu_monster.draw()
+        if not self.menu_credits:
+            # Intro text
+            pyxel.text(26, 25, "=== Diddi and the Bugs ===", 1)
+            pyxel.text(25, 25, "=== Diddi and the Bugs ===", 7)
+            # Option 1
+            pyxel.text(26, 35, "[1] Start game", 1)
+            pyxel.text(25, 35, "[1] Start game", 7)
+            # Option 2
+            pyxel.text(26, 45, "[2] Credits", 1)
+            pyxel.text(25, 45, "[2] Credits", 7)
+        else:
+            # Show the credits...
+            # Intro text
+            pyxel.text(16, 25, "=== Credits of Diddi and the Bugs ===", 1)
+            pyxel.text(15, 25, "=== Credits of Diddi and the Bugs ===", 7)
+            # Credits text
+            pyxel.text(6, 35, self.credits_text, 1)
+            pyxel.text(5, 35, self.credits_text, 7)
+            # Escape option
+            pyxel.text(26, 95, "Press SPACE to return", 1)
+            pyxel.text(25, 95, "Press SPACE to return", 7)
+        # Quit option
+        pyxel.text(26, 105, "Press Q to quit", 1)
+        pyxel.text(25, 105, "Press Q to quit", 7)
 
 
 App()
