@@ -9,13 +9,14 @@ scores, and enjoy the game as best as you can.
 
 ## The menu
 
-<!-- TODO: Add an image here! -->
+<img width=500 src="https://user-images.githubusercontent.com/83621221/188212640-3007c0dc-7f96-4e8e-9c12-5e91c80e3415.png">
 
 _New in version 3.0.0._
 
-This is the main menu. You can pick one of the following options:
+This is the main menu. You can pick an option by pressing one of these keys:
 
 - **1**: Start the real game.
+- **2**: See the credits scene. It mostly redirects to the [THANKS.txt](THANKS.md) file from this repo.
 
 ## Keys
 
