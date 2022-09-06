@@ -498,13 +498,14 @@ at github.com/DiddiLeija/diddi-and-the-bugs
     def update_menu(self):
         if pyxel.btnp(pyxel.KEY_Q):
             pyxel.quit()
-        if pyxel.btnp(pyxel.KEY_1):
-            # Option 1 -- Start the game
-            self.on_menu = False
-            self.startup()
-        if not self.menu_credits and pyxel.btnp(pyxel.KEY_2):
-            # Option 2 -- Display credits
-            self.menu_credits = True
+        if not self.menu_credits:
+            if pyxel.btnp(pyxel.KEY_1):
+                # Option 1 -- Start the game
+                self.on_menu = False
+                self.startup()
+            if pyxel.btnp(pyxel.KEY_2):
+                # Option 2 -- Display credits
+                self.menu_credits = True
         if self.menu_credits and pyxel.btnp(pyxel.KEY_SPACE):
             # Escape from option 2
             self.menu_credits = False
