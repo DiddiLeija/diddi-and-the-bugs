@@ -201,12 +201,26 @@ class Star:
     def __init__(self):
         self.x = pyxel.width
         self.y = random.randint(1, pyxel.height - 1)
+        self.show = False
+        self.speed = random.randint(1, 6)
+
+    def try_to_activate(self, possibilities):
+        if possibilities > 100:
+            exp = 15
+        elif possibilities > 50:
+            exp = 10
+        else:
+            exp = 5
+        if random.randint(1, possibilities * exp) == 1:
+            self.show = True
 
     def update(self):
-        pass
+        self.try_to_activate(random)
 
     def draw(self):
-        pass
+        if self.show:
+            # ... draw here ...
+            pass
 
 
 class App:
@@ -258,9 +272,11 @@ class App:
         pyxel.playm(0, loop=True)
 
     def reset_menu(self):
+        # match the real behavior
         self.menu_enemies = [Enemy() for sth in range(200)]
         self.menu_trash = [Trash() for sth in range(50)]
         self.menu_monster = Monster()
+        self.menu_stars = [Star() for sth in range(100)]
 
         self.menu_credits = False  # If True, display the credits
 
@@ -330,6 +346,11 @@ at github.com/DiddiLeija/diddi-and-the-bugs
             self.bullet_last_num_frame = 0
             self.bullet_last_held_long = False
             self.continous_bullets_message = False
+
+        # If no more stars are available, just create more
+        if len(self.stars) < 20:
+            self.stars += [Star() for sth in range(80)]  # ~= 100 stars?
+
         for bullet in self.bullet_list:
             if bullet.alive:
                 bullet.update()
@@ -345,6 +366,9 @@ at github.com/DiddiLeija/diddi-and-the-bugs
         self.add_trash()
         self.add_monster()
         self.move_spacecraft()
+
+        for star in self.stars:
+            star.update()
 
         if len(self.enemies) < 1 and self.alive and not self.already_won:
             # we can play a victory sound!
@@ -493,6 +517,8 @@ at github.com/DiddiLeija/diddi-and-the-bugs
             )
         elif self.alive:
             # the show is keep going!
+            for star in self.stars:
+                star.draw()
             pyxel.blt(self.player_x, self.player_y, 0, 8, 0, 8, 8, 0)
             for bullet in self.bullet_list:
                 bullet.draw()
@@ -502,7 +528,7 @@ at github.com/DiddiLeija/diddi-and-the-bugs
                 trash.draw()
             self.monster.draw()
         else:
-            # you loose! try again
+            # you lost! try again
             pyxel.text(
                 20, 50, " Oh no! :( Press R to return \n or press Q to quit the game", 1
             )
@@ -524,13 +550,18 @@ at github.com/DiddiLeija/diddi-and-the-bugs
         if self.menu_credits and pyxel.btnp(pyxel.KEY_SPACE):
             # Escape from option 2
             self.menu_credits = False
-        # Try to activate the enemies, using
+        # If no more stars are available, just create more
+        if len(self.stars) < 20:
+            self.stars += [Star() for sth in range(80)]  # ~= 100 stars?
+        # Try to activate the enemies and the stars, using
         # the strategy that's used in the real game.
         for enem in self.menu_enemies:
             enem.try_to_activate(len(self.menu_enemies))
         for trash in self.menu_trash:
             trash.try_to_activate(101)
         self.menu_monster.try_to_activate(202)
+        for star in self.stars:
+            star.update()
         # Move the enemies behind the screen.
         # These are shorter versions of add_monster(),
         # add_trash() and add_enemies(). The use of
@@ -550,6 +581,9 @@ at github.com/DiddiLeija/diddi-and-the-bugs
     def draw_menu(self):
         # Draw the screen
         pyxel.cls(0)
+        # Draw stars
+        for star in self.stars:
+            star.draw()
         # Draw the characters that play
         for enem in self.menu_enemies:
             enem.draw()
