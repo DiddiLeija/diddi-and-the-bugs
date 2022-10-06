@@ -195,6 +195,20 @@ class DeadMonster(Monster):
         pass
 
 
+class Star:
+    "A star, that works behind the background."
+
+    def __init__(self):
+        self.x = pyxel.width
+        self.y = random.randint(1, pyxel.height - 1)
+
+    def update(self):
+        pass
+
+    def draw(self):
+        pass
+
+
 class App:
     "The main piece of the game. It also operates the starfighter."
 
@@ -238,6 +252,7 @@ class App:
         self.trash = [Trash() for sth in range(50)]
         self.score = 0
         self.monster = Monster()  # this guy is outside the other enemies
+        self.stars = [Star() for sth in range(100)]
 
         pyxel.stop()
         pyxel.playm(0, loop=True)
