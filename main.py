@@ -200,7 +200,7 @@ class Star:
 
     def __init__(self):
         self.x = pyxel.width
-        self.y = random.randint(1, pyxel.height - 1)
+        self.y = random.randint(1, pyxel.height - 21)
         self.show = False
         self.speed = random.randint(1, 6)
 
@@ -215,7 +215,7 @@ class Star:
             self.show = True
 
     def update(self):
-        self.try_to_activate(random.choice([k + 1 for k in range(200)]))
+        self.try_to_activate(random.choice([k + 1 for k in range(150)]))
 
         if self.show:
             self.x -= self.speed
