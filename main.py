@@ -215,7 +215,7 @@ class Star:
             self.show = True
 
     def update(self):
-        self.try_to_activate(random)
+        self.try_to_activate(random.choice([k + 1 for k in range(200)]))
 
         if self.show:
             self.x -= self.speed
@@ -554,8 +554,8 @@ at github.com/DiddiLeija/diddi-and-the-bugs
             # Escape from option 2
             self.menu_credits = False
         # If no more stars are available, just create more
-        if len(self.stars) < 20:
-            self.stars += [Star() for sth in range(80)]  # ~= 100 stars?
+        if len(self.menu_stars) < 20:
+            self.menu_stars += [Star() for sth in range(80)]  # ~= 100 stars?
         # Try to activate the enemies and the stars, using
         # the strategy that's used in the real game.
         for enem in self.menu_enemies:
@@ -563,7 +563,7 @@ at github.com/DiddiLeija/diddi-and-the-bugs
         for trash in self.menu_trash:
             trash.try_to_activate(101)
         self.menu_monster.try_to_activate(202)
-        for star in self.stars:
+        for star in self.menu_stars:
             star.update()
         # Move the enemies behind the screen.
         # These are shorter versions of add_monster(),
@@ -585,7 +585,7 @@ at github.com/DiddiLeija/diddi-and-the-bugs
         # Draw the screen
         pyxel.cls(0)
         # Draw stars
-        for star in self.stars:
+        for star in self.menu_stars:
             star.draw()
         # Draw the characters that play
         for enem in self.menu_enemies:
