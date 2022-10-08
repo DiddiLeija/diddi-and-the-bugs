@@ -217,6 +217,9 @@ class Star:
     def update(self):
         self.try_to_activate(random)
 
+        if self.show:
+            self.x -= self.speed
+
     def draw(self):
         if self.show:
             # ... draw here ...
