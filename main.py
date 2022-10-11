@@ -202,6 +202,7 @@ class Star:
         self.x = pyxel.width
         self.y = random.randint(1, pyxel.height - 21)
         self.show = False
+        self.alive = True
         self.speed = random.randint(1, 6)
 
     def try_to_activate(self, possibilities):
@@ -219,6 +220,8 @@ class Star:
 
         if self.show:
             self.x -= self.speed
+        if self.x == 0:
+            self.alive = False
 
     def draw(self):
         if self.show:
@@ -350,6 +353,14 @@ at github.com/DiddiLeija/diddi-and-the-bugs
             self.bullet_last_held_long = False
             self.continous_bullets_message = False
 
+        # Kill all those stars who left the screen
+        for star_pos in range(len(self.stars)):
+            try:
+                if not self.stars[star_pos].alive:
+                    self.stars.pop(star_pos)
+            except IndexError:
+                # Just break, no more items are available
+                break
         # If no more stars are available, just create more
         if len(self.stars) < 20:
             self.stars += [Star() for sth in range(80)]  # ~= 100 stars?
@@ -553,6 +564,14 @@ at github.com/DiddiLeija/diddi-and-the-bugs
         if self.menu_credits and pyxel.btnp(pyxel.KEY_SPACE):
             # Escape from option 2
             self.menu_credits = False
+        # Kill all those stars who left the screen
+        for star_pos in range(len(self.menu_stars)):
+            try:
+                if not self.menu_stars[star_pos].alive:
+                    self.menu_stars.pop(star_pos)
+            except IndexError:
+                # Just break, no more items are available
+                break
         # If no more stars are available, just create more
         if len(self.menu_stars) < 20:
             self.menu_stars += [Star() for sth in range(80)]  # ~= 100 stars?
