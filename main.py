@@ -226,7 +226,7 @@ class Star:
     def draw(self):
         if self.show:
             # ... draw here ...
-            pass
+            pyxel.pset(self.x, self.y, 7)
 
 
 class App:
