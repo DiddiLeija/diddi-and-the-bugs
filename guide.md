@@ -1,22 +1,21 @@
 # Diddi and the Bugs -- The definitive guide
 
-<img width=800 src="https://user-images.githubusercontent.com/83621221/152022041-9ca787f0-5334-4f22-becd-e270f3067a95.png">
-
+<img width=800 src="https://user-images.githubusercontent.com/83621221/196548442-c0995ce6-5593-48a3-b9e9-1849922e88b2.png">
 
 Every game, book and story has a universe... and this game
-has a universe too! This guide explains how to get the greatest
-scores, and enjoy the game as best as you can.
+has a universe too! This guide explains how to dive deep into it,
+get the greatest scores, and enjoy the game as best as you can.
 
 ## The menu
 
-<img width=500 src="https://user-images.githubusercontent.com/83621221/188212640-3007c0dc-7f96-4e8e-9c12-5e91c80e3415.png">
+<img width=500 src="https://user-images.githubusercontent.com/83621221/196548594-17fec858-ebb2-45ff-8e96-e17e137e1442.png">
 
 _New in version 3.0.0._
 
 This is the main menu. You can pick an option by pressing one of these keys:
 
 - **1**: Start the real game.
-- **2**: See the credits scene. It mostly redirects to the [THANKS.txt](THANKS.md) file from this repo.
+- **2**: See the credits scene. Basically, it redirects to the [THANKS.txt](THANKS.txt) file from this repo.
 
 ## Keys
 
@@ -29,7 +28,7 @@ If you press some keys, some actions may happen.
 - **Q**: Quit the game, and close the window.
 - **R**: Restart the game, and return to the menu [^1].
 
-### Spacecraft (Willpower) keys
+### Spacecraft (Willpower) keys [^1]
 
 - **Up / down keys**: Use them to move the Willpower, and avoid enemies. You can also use WASD keys (**W and S,** to be more precise)
 - **Space**: Send a bullet of _L1-F3_ energized serum, that can destroy both bugs
@@ -45,6 +44,9 @@ A quick guide to all the elements on the game.
 
 The Willpower is a modified spacecraft modified by Diddi, to shoot the serum. You
 will have to pilot the spacecraft to fight the bugs!
+
+**Fun fact:** This spacecraft came from the same place than its pilot, Diddi. Check out
+[@DiddiLeija](https://github.com/DiddiLeija)'s [wiki](https://diddileija.github.io/wiki) to learn more.
 
 ### _L1-F3_ energized serum bullet
 
@@ -63,6 +65,9 @@ it disappears and cannot damage other enemies. You can shoot an unlimited number
 ![image](https://user-images.githubusercontent.com/83621221/143620453-7ebbf68f-fcf3-4ce9-b356-e5977d29b3eb.png)
 ![image](https://user-images.githubusercontent.com/83621221/143620487-095bbca8-0036-4d91-a973-cc7fd7cacfbe.png)
 
+They're the creepy creatures that menace the Earth! You're the only one who
+can destroy them to save the planet.
+
 These bugs, viruses, bacteria and fungi are the most common element in this game.
 They go directly to you, and can have multiple aspects. If they touch your spacecraft,
 you will loose the game. They can be destroyed with a bullet, and you can earn **10 points**.
@@ -74,8 +79,8 @@ The idea is to **destroy 200 bugs**.
 ![image](https://user-images.githubusercontent.com/83621221/143620539-57b2df7a-5d4e-494e-9082-4e6a45be868f.png)
 ![image](https://user-images.githubusercontent.com/83621221/156434818-d07df34d-e2ce-46c9-9226-81327a8bd75b.png)
 
-Unfortunately, our loveful Earth's atmosphere is filled up with trash. But you
-can help to destroy them using bullets. If you destroy one, you can earn
+Unfortunately, our loveful Earth's atmosphere is filled up with trash [^2]. But you
+can help to wipe them out using your bullets. If you destroy one, you can earn
 **50, 100 or even 200 extra points**! However, if they touch you, you will loose the game.
 
 ### Messages bar
@@ -84,8 +89,9 @@ can help to destroy them using bullets. If you destroy one, you can earn
 
 _New in version 2.0.0._
 
-This is the "event log". Here, you can notified by both Diddi or the "System" when something happens. For example, when you pause or
-restart the game. Also, if you find one of our "easter eggs", you'll get notified too!
+Here, you can be notified by both Diddi or the "System" when something happens, like an
+"event log". For example, when you pause or restart the game, the "System" will tell you. Also, if you find one
+of our "easter eggs", you'll get notified too!
 
 ### The Monster
 
@@ -93,12 +99,16 @@ restart the game. Also, if you find one of our "easter eggs", you'll get notifie
 
 _New in version 2.0.0._
 
+Wait...? Where did this giant monster came from...?
+
 This strange but giant enemy **only appears once**. It can move even
-faster than the bullets, but also move slowly. It uses 16x16 pixels
-(normal enemies have 8x8 pixels).
+faster than the bullets, but also move slowly... it's a randomness thing.
+It uses 16x16 pixels, so it's bigger than everything else in the game
+(normal enemies and the spacecraft use 8x8 pixels or less!).
 
 If destroyed, the Monster will leave **1000 extra points**! However, if it
 crosses the screen without being defeated, it won't appear again and won't
-leave any points.
+leave any points. You'll have to start again for a chance to destroy it.
 
-[^1]: Does not apply in the main menu interface.
+[^1]: This function does not apply in the main menu interface.
+[^2]: Unfortunately, this is totally true.
