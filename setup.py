@@ -20,7 +20,6 @@ except ImportError:
     sys.exit("COuld not find package 'cx_Freeze'. Please install it and try again.")
 
 EXPECTED_PYTHON = (3, 7)
-GAME_VERSION = "1.2.0"
 
 if sys.platform != "win32":
     sys.exit(
@@ -32,7 +31,6 @@ elif EXPECTED_PYTHON > sys.version_info:
 
 setup(
     name="Diddi and the Bugs",
-    version=GAME_VERSION,
     description="Diddi vs. Bugs!",
     author="Diego Ramirez",
     author_email="dr01191115@gmail.com",
