@@ -10,7 +10,7 @@ import pyxel
 # When bumping to a higher Python requirement, please
 # modify this varible, basically to avoid users from
 # running with an old Python.
-EXPECTED_PYTHON = (3, 7)
+EXPECTED_PYTHON = (3, 8)
 
 if sys.version_info < EXPECTED_PYTHON:
     sys.exit(
