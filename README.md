@@ -30,7 +30,7 @@ If you don't find what you expected, feel free to open an issue on GitHub (or co
 
 ### Python version
 
-If you will use Python get sure to have **Python >= 3.7**.
+If you will use Python get sure to have **Python >= 3.8**.
 
 ### Building the zipped distributions by yourself
 
