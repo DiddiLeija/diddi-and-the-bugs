@@ -73,7 +73,7 @@ def create_packages(session):
     session.run(
         "python",
         "-c",
-        "import os; os.rename('./dist/..pyxapp', './dist/pyxel_dist.pyxapp')",
+        "import os; os.rename('./dist/dist.pyxapp', './dist/pyxel_dist.pyxapp')",
     )
     session.run(
         "python",
