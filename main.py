@@ -254,6 +254,7 @@ class App:
         self.on_menu = True  # variable to show the menu
 
         self.startup()
+        pyxel.run(self.update, self.draw)
 
     def reset_game(self):
         self.alive = True  # the player is still alive
@@ -300,11 +301,21 @@ at github.com/DiddiLeija/diddi-and-the-bugs
     def startup(self):
         if self.on_menu:
             self.reset_menu()
-            pyxel.run(self.update_menu, self.draw_menu)
         else:
             self.reset_game()
             self.add_message("Let's go!")
-            pyxel.run(self.update_game, self.draw_game)
+
+    def update(self):
+        if self.on_menu:
+            self.update_menu()
+        else:
+            self.update_game()
+
+    def draw(self):
+        if self.on_menu:
+            self.draw_menu()
+        else:
+            self.draw_game()
 
     def update_game(self):
         if pyxel.btnp(pyxel.KEY_Q):
