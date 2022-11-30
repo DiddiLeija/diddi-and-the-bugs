@@ -41,6 +41,10 @@ If you have [Nox](https://nox.thea.codes) and the Python required version (see a
 of commands to generate the source zip, the Pyxel executable and the Windows executable (if running under Windows). The final
 contents will be found on a `dist` folder [^1].
 
+### Web support!
+
+Try out the latest dist: **the Pyxel web version!** See it [here](https://kitao.github.io/pyxel/wasm/launcher/?run=DiddiLeija.diddi-and-the-bugs...main).
+
 ## How to win
 
 Use the energized serum to destroy **200 bugs** and win! In the meantime, you can earn extra points
