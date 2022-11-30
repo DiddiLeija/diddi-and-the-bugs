@@ -19,6 +19,7 @@ assignees: ''
 - [ ] Windows executable (`windows.zip`)
 - [ ] Pyxel executable (`pyxel-dist.zip`)
 - [ ] Pure Python (`source.zip`)
+- [ ] Web version (in-browser)
 
 **Environment**
 <!--- Provide details of your environment to reproduce this issue. --->
