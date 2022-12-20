@@ -83,6 +83,9 @@ def create_packages(session):
         "./dist/pyxel_dist.zip",
         "./dist/pyxel_dist.pyxapp",
     )
+    # Generate an HTML using Pyxel's provided strategy
+    # TODO: fixme!
+    session.warn("Generating the HTML file...")
     # If Windows, create the cx_Freeze executable
     if sys.platform == "win32":
         session.warn("Running in Windows, generating the cx_Freeze executable...")
