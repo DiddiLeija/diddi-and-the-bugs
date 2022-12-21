@@ -84,8 +84,14 @@ def create_packages(session):
         "./dist/pyxel_dist.pyxapp",
     )
     # Generate an HTML using Pyxel's provided strategy
-    # TODO: fixme!
     session.warn("Generating the HTML file...")
+    session.cd("dist")
+    session.run("pyxel", "app2html", "pyxel_dist.pyxapp")
+    session.run(
+        "python", "-c", "import os; os.rename('./pyxel_dist.html', './html_dist.html')"
+    )
+    session.run("python", "-m", "zipfile", "-c", "./html_dist.zip", "./html_dist.html")
+    session.cd("..")
     # If Windows, create the cx_Freeze executable
     if sys.platform == "win32":
         session.warn("Running in Windows, generating the cx_Freeze executable...")
@@ -109,7 +115,7 @@ def create_packages(session):
         "python",
         "-c",
         "import os; os.remove('./dist/main.py'); os.remove('./dist/resource.pyxres'); "
-        "os.remove('./dist/pyxel_dist.pyxapp')",
+        "os.remove('./dist/pyxel_dist.pyxapp'); os.remove('./dist/html_dist.html')",
     )
     if os.path.exists("./build"):
         session.run("python", "-c", "import shutil; shutil.rmtree('./build')")
