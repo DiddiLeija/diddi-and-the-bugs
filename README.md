@@ -65,8 +65,7 @@ Read [this contributing guidelines](https://github.com/DiddiLeija/diddi-and-the-
 
 ### Discord server
 
-There's a Discord server where you can ask and share stuff related to Diddi and The Bugs! Check out https://github.com/DiddiLeija/diddi-and-the-bugs/issues/45
-for full details.
+There's a Discord server where you can ask and share stuff related to Diddi and The Bugs! **Wanna join? https://discord.gg/DfrHxT9ENy**
 
 ### Wiki
 
