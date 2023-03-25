@@ -95,7 +95,13 @@ class Enemy:
             self.show = False
         for bullet in bullets:
             if self.bullet_collision(bullet):
-                self.alive = False
+                if hasattr(self, "hit_count"):
+                    if self.hit_count == 2:
+                        self.alive = False
+                    else:
+                        self.hit_count += 1
+                else:
+                    self.alive = False
                 bullet.alive = False
 
     def draw(self):
@@ -119,6 +125,9 @@ class Enemy:
             and self.y in range(bullet.y - 5, bullet.y + bullet.h + 5)
             and bullet.alive
         )
+
+    def hit_special_move(self):
+        self.alive = False
 
 
 class Trash(Enemy):
@@ -157,6 +166,7 @@ class Monster(Enemy):
         self.max_speed = 6  # it can move *really* fast, or maybe not!
         self.speed = random.randint(1, self.max_speed)
         self.alive = True
+        self.hit_count = 0
         self.show = False
         self.size = 16  # 16p per side, 4x4 blocks in the Pyxel editor
         self.recycle = False  # don't regenerate after reaching x=0
@@ -177,6 +187,9 @@ class Monster(Enemy):
             )
             and bullet.alive
         )
+    
+    def hit_special_move(self):
+        self.hit_count += 1
 
 
 class DeadMonster(Monster):
@@ -259,6 +272,7 @@ class App:
     def reset_game(self):
         self.alive = True  # the player is still alive
         self.already_won = False
+        self.used_special_move = False
         self.pause = False
         self.player_x = 10
         self.player_y = 50
@@ -363,6 +377,18 @@ at github.com/DiddiLeija/diddi-and-the-bugs
             self.bullet_last_num_frame = 0
             self.bullet_last_held_long = False
             self.continous_bullets_message = False
+
+        if pyxel.btnr(pyxel.KEY_Z):
+            if self.used_special_move: return
+            self.used_special_move = True
+            # some cool animations
+            for enem in self.enemies:
+                if enem.is_alive and enem.show:
+                    enem.hit_special_move()
+
+            if self.monster.show and self.monster.alive:
+                self.monster.hit_special_move()
+
 
         # Kill all those stars who left the screen
         for star_pos in range(len(self.stars)):
