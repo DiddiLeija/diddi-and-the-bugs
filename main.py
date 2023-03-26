@@ -187,7 +187,7 @@ class Monster(Enemy):
             )
             and bullet.alive
         )
-    
+
     def hit_special_move(self):
         self.hit_count += 1
 
@@ -379,16 +379,16 @@ at github.com/DiddiLeija/diddi-and-the-bugs
             self.continous_bullets_message = False
 
         if pyxel.btnr(pyxel.KEY_Z):
-            if self.used_special_move: return
+            if self.used_special_move:
+                return
             self.used_special_move = True
             # some cool animations
             for enem in self.enemies:
-                if enem.is_alive and enem.show:
+                if enem.alive and enem.show:
                     enem.hit_special_move()
 
             if self.monster.show and self.monster.alive:
                 self.monster.hit_special_move()
-
 
         # Kill all those stars who left the screen
         for star_pos in range(len(self.stars)):
