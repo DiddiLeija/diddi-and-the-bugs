@@ -5,6 +5,7 @@ the code quality, and build the zipped distributions.
 
 import os
 import sys
+
 import nox
 
 nox.options.sessions = ["format", "lint"]
@@ -12,7 +13,6 @@ nox.options.sessions = ["format", "lint"]
 files = ["noxfile.py", "main.py", "setup.py"]
 
 
-@nox.session(name="format")
 def format(session):
     "Run formatters."
     session.install("-r", "test-requirements.txt")
@@ -20,7 +20,6 @@ def format(session):
     session.run("black", *files)
 
 
-@nox.session(name="lint")
 def lint(session):
     "Check the style and quality."
     session.install("-r", "test-requirements.txt")
@@ -29,7 +28,6 @@ def lint(session):
     session.run("black", "--check", *files)
 
 
-@nox.session(name="package")
 def package(session):
     "Build and package everything up."
     # First of all, install the requirements
