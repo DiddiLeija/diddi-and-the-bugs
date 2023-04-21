@@ -5,24 +5,23 @@ the code quality, and build the zipped distributions.
 
 import os
 import sys
-
 import nox
 
-nox.options.sessions = ["keep-codebase-clean", "check-quality"]
+nox.options.sessions = ["format", "lint"]
 
 files = ["noxfile.py", "main.py", "setup.py"]
 
 
-@nox.session(name="keep-codebase-clean")
-def keep_codebase_clean(session):
+@nox.session(name="format")
+def format(session):
     "Run formatters."
     session.install("-r", "test-requirements.txt")
     session.run("isort", *files)
     session.run("black", *files)
 
 
-@nox.session(name="check-quality")
-def check_quality(session):
+@nox.session(name="lint")
+def lint(session):
     "Check the style and quality."
     session.install("-r", "test-requirements.txt")
     session.run("flake8", *files, "--max-line-length=127")
@@ -30,8 +29,8 @@ def check_quality(session):
     session.run("black", "--check", *files)
 
 
-@nox.session(name="create-packages")
-def create_packages(session):
+@nox.session(name="package")
+def package(session):
     "Build and package everything up."
     # First of all, install the requirements
     session.install("-r", "requirements.txt")
