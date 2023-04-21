@@ -33,4 +33,4 @@ jobs:
         python -m pip install -r requirements.txt
     - name: Run linters with Nox
       run: |
-        nox --non-interactive -s check-quality
+        nox --non-interactive -s lint
