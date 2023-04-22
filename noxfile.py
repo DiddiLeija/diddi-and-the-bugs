@@ -21,6 +21,7 @@ def format(session):
     session.run("black", *files)
 
 
+@nox.session
 def lint(session):
     "Check the style and quality."
     session.install("-r", "test-requirements.txt")
