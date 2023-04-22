@@ -30,6 +30,7 @@ def lint(session):
     session.run("black", "--check", *files)
 
 
+@nox.session
 def package(session):
     "Build and package everything up."
     # First of all, install the requirements
