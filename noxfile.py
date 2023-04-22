@@ -13,6 +13,7 @@ nox.options.sessions = ["format", "lint"]
 files = ["noxfile.py", "main.py", "setup.py"]
 
 
+@nox.session
 def format(session):
     "Run formatters."
     session.install("-r", "test-requirements.txt")
