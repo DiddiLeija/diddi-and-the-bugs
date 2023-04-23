@@ -262,6 +262,7 @@ class App:
             "I'm hungry, aren't you?",
             "It's cold here, don't you think?",
             "Wow! This spacecraft really moves!",
+            "Fire! Fire! Fire!",
         ]
 
         self.on_menu = True  # variable to show the menu
@@ -380,8 +381,10 @@ at github.com/DiddiLeija/diddi-and-the-bugs
 
         if pyxel.btnr(pyxel.KEY_Z):
             if self.used_special_move:
+                self.add_message("You have already used the Z-Move", True)
                 return
             self.used_special_move = True
+            self.add_message("Go Ahead! Z-Move Activate")
             # some cool animations
             for enem in self.enemies:
                 if enem.alive and enem.show:
@@ -389,6 +392,7 @@ at github.com/DiddiLeija/diddi-and-the-bugs
 
             if self.monster.show and self.monster.alive:
                 self.monster.hit_special_move()
+                self.add_message("Yeah! Z-Move Hit The Monster")
 
         # Kill all those stars who left the screen
         for star_pos in range(len(self.stars)):
