@@ -9,8 +9,8 @@ My Game Off 2021 entry.
 > The Earth is under invasion. A fleet of giant bugs, bacteria, and viruses are
 > outside of the planet.
 >
-> In the meantime, Diddi was developing a secret spacecraft. When his frineds told him of
-> the invasion, he decided to visit the brilliant Dr. Chuck (a scientist, and also
+> In the meantime, Diddi was developing a secret spacecraft. When his friends told him of
+> the invasion, Diddi decided to visit the brilliant Dr. Chuck (a scientist, and also
 > an old friend of Diddi). The doctor gave him the **L1-F3** experimental serum, that kills anything
 > alive. That should destroy those bugs...
 >
