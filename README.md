@@ -37,7 +37,7 @@ If you will use Python get sure to have **Python >= 3.8**.
 _New since 2.0.0_.
 
 If you have a local clone of this repo, you can build the zipped distributions (those that we distribute on itch.io),
-If you have [Nox](https://nox.thea.codes) and the Python required version (see above), run `nox -s create-packages`. It will run a lot
+If you have [Nox](https://nox.thea.codes) and the Python required version (see above), run `nox -s package`. It will run a lot
 of commands to generate the source zip, the Pyxel executable and the Windows executable (if running under Windows). The final
 contents will be found on a `dist` folder [^1].
 
@@ -65,7 +65,7 @@ Read [this contributing guidelines](https://github.com/DiddiLeija/diddi-and-the-
 
 ### Discord server
 
-There's a Discord server where you can ask and share stuff related to Diddi and The Bugs! **Wanna join? https://discord.gg/DfrHxT9ENy**
+There's a Discord server (_DiddiLeija's Server_) where you can ask and share stuff related to Diddi and The Bugs! **Wanna join? https://discord.gg/DfrHxT9ENy**
 
 ### Wiki
 
