@@ -275,6 +275,8 @@ class App:
 
         self.on_menu = True  # variable to show the menu
 
+        self.z_frame = -5  # a variable used in gameplay
+
         self.startup()
         pyxel.run(self.update, self.draw)
 
@@ -297,6 +299,7 @@ class App:
         self.score = 0
         self.monster = Monster()  # this guy is outside the other enemies
         self.stars = [Star() for sth in range(100)]
+        self.z_frame = -5
 
         pyxel.stop()
         pyxel.playm(0, loop=True)
@@ -392,6 +395,7 @@ at github.com/DiddiLeija/diddi-and-the-bugs
                 self.add_message("You have already used the Z-Move", True)
                 return
             self.used_special_move = True
+            self.z_frame = pyxel.frame_count
             self.add_message("Go Ahead! Z-Move Activate")
             # some cool animations
             for enem in self.enemies:
@@ -540,6 +544,14 @@ at github.com/DiddiLeija/diddi-and-the-bugs
             pyxel.text(1, pyxel.height - 8, self.messages[1], 1)
             pyxel.text(2, pyxel.height - 8, self.messages[1], 7)
 
+    def draw_player(self):
+        # A spec for drawing the player's
+        # spacecraft during gameplay.
+        if self.used_special_move and pyxel.frame_count < self.z_frame + 10:
+            pyxel.blt(self.player_x, self.player_y, 0, 40, 16, 8, 8, 0)
+        else:
+            pyxel.blt(self.player_x, self.player_y, 0, 8, 0, 8, 8, 0)
+
     def draw_game(self):
         pyxel.cls(0)
         score = f"Score: {self.score}"
@@ -582,7 +594,7 @@ at github.com/DiddiLeija/diddi-and-the-bugs
             # the show is keep going!
             for star in self.stars:
                 star.draw()
-            pyxel.blt(self.player_x, self.player_y, 0, 8, 0, 8, 8, 0)
+            self.draw_player()
             for bullet in self.bullet_list:
                 bullet.draw()
             for enem in self.enemies:
