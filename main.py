@@ -157,7 +157,7 @@ class Monster(Enemy):
     def __init__(self):
         # override all these stuff,
         # which heavily customizes the behavior
-        self.possible_enemies = [(48, 0)]
+        self.possible_enemies = [(48, 0), (48, 16)]
         self.aspect = self.possible_enemies[
             0
         ]  # there's only one aspect, no need to choose
@@ -190,6 +190,14 @@ class Monster(Enemy):
 
     def hit_special_move(self):
         self.hit_count += 1
+
+    def draw(self):
+        # We fixed this function to add
+        # an extra look when hit_count == 1.
+        if self.hit_count == 1:
+            # TODO: Find a better place to do this?
+            self.aspect = self.possible_enemies[1]
+        Enemy.draw(self)
 
 
 class DeadMonster(Monster):
