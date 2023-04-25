@@ -547,7 +547,7 @@ at github.com/DiddiLeija/diddi-and-the-bugs
     def draw_player(self):
         # A spec for drawing the player's
         # spacecraft during gameplay.
-        if self.used_special_move and pyxel.frame_count < self.z_frame + 10:
+        if self.used_special_move and pyxel.frame_count < self.z_frame + 20:
             pyxel.blt(self.player_x, self.player_y, 0, 40, 16, 8, 8, 0)
         else:
             pyxel.blt(self.player_x, self.player_y, 0, 8, 0, 8, 8, 0)
