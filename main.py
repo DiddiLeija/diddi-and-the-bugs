@@ -419,7 +419,7 @@ at github.com/DiddiLeija/diddi-and-the-bugs
                 return
             self.used_special_move = True
             self.z_frame = pyxel.frame_count
-            self.add_message("Go Ahead! Z-Move Activate")
+            self.add_message("Go Ahead! Z-Move Activated")
             # some cool animations
             for enem in self.enemies:
                 if enem.alive and enem.show:
