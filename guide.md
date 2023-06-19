@@ -34,6 +34,10 @@ If you press some keys, some actions may happen.
 - **Space**: Send a bullet of _L1-F3_ energized serum, that can destroy both bugs
   and trash!
 
+### The Z-Move (Special Attack)
+
+_New in version 4.0.0._
+
 ## Elements guide
 
 A quick guide to all the elements on the game.
@@ -103,8 +107,11 @@ Wait...? Where did this giant monster came from...?
 
 This strange but giant enemy **only appears once**. It can move even
 faster than the bullets, but also move slowly... it's a randomness thing.
-It uses 16x16 pixels, so it's bigger than everything else in the game
-(normal enemies and the spacecraft use 8x8 pixels or less!).
+It uses 16x16 pixels, so it's way bigger than everything else in the game
+(other mobs and items use 8x8 pixels, or even less!).
+
+The Monster is stronger than regular enemies and trash, so you must
+**hit it twice** to defeat it. (_New in version 4.0.0_).
 
 If destroyed, the Monster will leave **1000 extra points**! However, if it
 crosses the screen without being defeated, it won't appear again and won't
