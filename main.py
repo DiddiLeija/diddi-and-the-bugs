@@ -431,7 +431,7 @@ at github.com/DiddiLeija/diddi-and-the-bugs
                 self.monster.hit_special_move()
                 self.add_message("Yeah! Z-Move Hit The Monster")
                 z_affected += 1
-            
+
             # Check if somebody was affected and play the sound effects
             if z_affected > 0:
                 pyxel.playm(7)
