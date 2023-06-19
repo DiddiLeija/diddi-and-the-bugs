@@ -417,6 +417,7 @@ at github.com/DiddiLeija/diddi-and-the-bugs
             if self.used_special_move:
                 self.add_message("You have already used the Z-Move", True)
                 return
+            z_affected = 0
             self.used_special_move = True
             self.z_frame = pyxel.frame_count
             self.add_message("Go Ahead! Z-Move Activated")
@@ -424,10 +425,16 @@ at github.com/DiddiLeija/diddi-and-the-bugs
             for enem in self.enemies:
                 if enem.alive and enem.show:
                     enem.hit_special_move()
+                    z_affected += 1
 
             if self.monster.show and self.monster.alive:
                 self.monster.hit_special_move()
                 self.add_message("Yeah! Z-Move Hit The Monster")
+                z_affected += 1
+            
+            # Check if somebody was affected and play the sound effects
+            if z_affected > 0:
+                pyxel.playm(7)
 
         # Kill all those stars who left the screen
         for star_pos in range(len(self.stars)):
