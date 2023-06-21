@@ -33,10 +33,22 @@ If you press some keys, some actions may happen.
 - **Up / down keys**: Use them to move the Willpower, and avoid enemies. You can also use WASD keys (**W and S,** to be more precise)
 - **Space**: Send a bullet of _L1-F3_ energized serum, that can destroy both bugs
   and trash!
+- **Z**: This yields the Special Attack, if available (see below)
 
 ### The Z-Move (Special Attack)
 
 _New in version 4.0.0._
+
+This special move **hits all the mobs with an energy blast!** Though this won't affect
+trash items, sorry... Anyway, this is a great way to clear up your space -- just remember
+**you can only use this move once** per game!
+
+**_Hint:_** Don't use this move as soon as the game starts. Try to resist the temptation
+of using it, unless...
+
+- The Monster (see its section below) moves fast and you can't reach it at all.
+- You are *really* overwhelmed by mobs, and could loose the whole game (this happens
+  sometimes after there're 100 mobs or less).
 
 ## Elements guide
 
