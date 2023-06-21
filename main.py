@@ -19,6 +19,11 @@ if sys.version_info < EXPECTED_PYTHON:
 
 pyxel.init(180, 140, title="Diddi and the Bugs")
 
+# We have set the "Z-move animation time" to 20
+# frames. This means the special effect will last
+# 20 frames, and then everything will turn back to normal.
+Z_ANIMATION_TIME = 20
+
 
 class Bullet:
     "An independent bullet."
@@ -49,6 +54,9 @@ class Bullet:
 
 class Enemy:
     "Some bugs!"
+    # We've put this outside of __init__
+    # to avoid issues with instances.
+    z_killed = -1
 
     def __init__(self):
         self.possible_enemies = [
@@ -104,10 +112,15 @@ class Enemy:
                     self.alive = False
                 bullet.alive = False
 
+    def draw_z(self):
+        # Special func for drawing a z-killed
+        # enemy... We draw a certain image
+        pyxel.blt(self.x, self.y, 0, 40, 24, self.size, self.size, 0)
+
     def draw(self):
-        if not self.show:
+        if not self.show and self.z_killed < 0:
             return None
-        if self.alive:
+        if self.alive and self.z_killed < 0:
             pyxel.blt(
                 self.x,
                 self.y,
@@ -118,6 +131,12 @@ class Enemy:
                 self.size,
                 0,
             )
+        if (
+            pyxel.frame_count < (self.z_killed + Z_ANIMATION_TIME + 10)
+            and not self.alive
+        ):
+            # print("Z-Move Graphics here?")  # test
+            self.draw_z()
 
     def bullet_collision(self, bullet):
         return (
@@ -128,6 +147,7 @@ class Enemy:
 
     def hit_special_move(self):
         self.alive = False
+        self.z_killed = pyxel.frame_count
 
 
 class Trash(Enemy):
@@ -190,6 +210,9 @@ class Monster(Enemy):
 
     def hit_special_move(self):
         self.hit_count += 1
+
+    def draw_z(self):
+        pass
 
     def draw(self):
         # We fixed this function to add
@@ -275,6 +298,8 @@ class App:
 
         self.on_menu = True  # variable to show the menu
 
+        self.z_frame = -5  # a variable used in gameplay
+
         self.startup()
         pyxel.run(self.update, self.draw)
 
@@ -297,6 +322,7 @@ class App:
         self.score = 0
         self.monster = Monster()  # this guy is outside the other enemies
         self.stars = [Star() for sth in range(100)]
+        self.z_frame = -5
 
         pyxel.stop()
         pyxel.playm(0, loop=True)
@@ -391,16 +417,24 @@ at github.com/DiddiLeija/diddi-and-the-bugs
             if self.used_special_move:
                 self.add_message("You have already used the Z-Move", True)
                 return
+            z_affected = 0
             self.used_special_move = True
-            self.add_message("Go Ahead! Z-Move Activate")
+            self.z_frame = pyxel.frame_count
+            self.add_message("Go Ahead! Z-Move Activated")
             # some cool animations
             for enem in self.enemies:
                 if enem.alive and enem.show:
                     enem.hit_special_move()
+                    z_affected += 1
 
             if self.monster.show and self.monster.alive:
                 self.monster.hit_special_move()
                 self.add_message("Yeah! Z-Move Hit The Monster")
+                z_affected += 1
+
+            # Check if somebody was affected and play the sound effects
+            if z_affected > 0:
+                pyxel.playm(7)
 
         # Kill all those stars who left the screen
         for star_pos in range(len(self.stars)):
@@ -540,6 +574,17 @@ at github.com/DiddiLeija/diddi-and-the-bugs
             pyxel.text(1, pyxel.height - 8, self.messages[1], 1)
             pyxel.text(2, pyxel.height - 8, self.messages[1], 7)
 
+    def draw_player(self):
+        # A spec for drawing the player's
+        # spacecraft during gameplay.
+        if (
+            self.used_special_move
+            and pyxel.frame_count < self.z_frame + Z_ANIMATION_TIME
+        ):
+            pyxel.blt(self.player_x, self.player_y, 0, 40, 16, 8, 8, 0)
+        else:
+            pyxel.blt(self.player_x, self.player_y, 0, 8, 0, 8, 8, 0)
+
     def draw_game(self):
         pyxel.cls(0)
         score = f"Score: {self.score}"
@@ -582,7 +627,7 @@ at github.com/DiddiLeija/diddi-and-the-bugs
             # the show is keep going!
             for star in self.stars:
                 star.draw()
-            pyxel.blt(self.player_x, self.player_y, 0, 8, 0, 8, 8, 0)
+            self.draw_player()
             for bullet in self.bullet_list:
                 bullet.draw()
             for enem in self.enemies:
