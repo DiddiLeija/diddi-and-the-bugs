@@ -1,5 +1,9 @@
 # Diddi and the Bugs
 
+[![Nox](https://img.shields.io/badge/%F0%9F%A6%8A-Nox-D85E00.svg)](https://github.com/wntrblm/nox)
+[![GitHub Repo stars](https://img.shields.io/github/stars/DiddiLeija/diddi-and-the-bugs?style=social)](https://github.com/DiddiLeija/diddi-and-the-bugs)
+[![GitHub forks](https://img.shields.io/github/forks/DiddiLeija/diddi-and-the-bugs?style=social)](https://github.com/DiddiLeija/diddi-and-the-bugs)
+
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/G2G3AL6D6)
 
 My Game Off 2021 entry.
@@ -65,7 +69,7 @@ Read [this contributing guidelines](https://github.com/DiddiLeija/diddi-and-the-
 
 ### Discord server
 
-There's a Discord server (_DiddiLeija's Server_) where you can ask and share stuff related to Diddi and The Bugs! **Wanna join? https://discord.gg/DfrHxT9ENy**
+There's a Discord server (officially named _DiddiLeija's Server_) where you can ask and share stuff related to Diddi and The Bugs! **Wanna join? https://discord.gg/DfrHxT9ENy**
 
 ### Wiki
 
