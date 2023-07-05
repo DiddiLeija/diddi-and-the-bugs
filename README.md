@@ -1,6 +1,8 @@
 # Diddi and the Bugs
 
 [![Nox](https://img.shields.io/badge/%F0%9F%A6%8A-Nox-D85E00.svg)](https://github.com/wntrblm/nox)
+[![License](https://img.shields.io/github/license/DiddiLeija/diddi-and-the-bugs)](https://github.com/DiddiLeija/diddi-and-the-bugs)
+[![GitHub](https://img.shields.io/github/v/release/DiddiLeija/diddi-and-the-bugs?logo=github&sort=semver)](https://github.com/DiddiLeija/diddi-and-the-bugs)
 [![GitHub Repo stars](https://img.shields.io/github/stars/DiddiLeija/diddi-and-the-bugs?style=social)](https://github.com/DiddiLeija/diddi-and-the-bugs)
 [![GitHub forks](https://img.shields.io/github/forks/DiddiLeija/diddi-and-the-bugs?style=social)](https://github.com/DiddiLeija/diddi-and-the-bugs)
 
