@@ -282,7 +282,10 @@ class App:
         # the app quits.
         self.messages = []
 
-        pyxel.load("resource.pyxres")
+        self.skins = ["resource.pyxres", "resource_2.pyxres"]
+        self.current_skin = 0
+
+        pyxel.load(self.skins[self.current_skin])
 
         self.message_goodies = [
             "Woo hoo!",
@@ -335,6 +338,7 @@ class App:
         self.menu_stars = [Star() for sth in range(100)]
 
         self.menu_credits = False  # If True, display the credits
+        self.menu_skin = False
 
         # This is the credits' text
         self.credits_text = """This game was created by Diego Ramirez.\n
@@ -647,17 +651,32 @@ at github.com/DiddiLeija/diddi-and-the-bugs
     def update_menu(self):
         if pyxel.btnp(pyxel.KEY_Q):
             pyxel.quit()
-        if not self.menu_credits:
-            if pyxel.btnp(pyxel.KEY_1):
+        if not self.menu_credits and not self.menu_skin:
+            if pyxel.btnp(pyxel.KEY_1) or pyxel.btnp(pyxel.KEY_KP_1):
                 # Option 1 -- Start the game
                 self.on_menu = False
                 self.startup()
-            if pyxel.btnp(pyxel.KEY_2):
+            if pyxel.btnp(pyxel.KEY_2) or pyxel.btnp(pyxel.KEY_KP_2):
                 # Option 2 -- Display credits
                 self.menu_credits = True
+            if pyxel.btnp(pyxel.KEY_3) or pyxel.btnp(pyxel.KEY_KP_3):
+                # Option 3 -- Choose the Skin
+                self.menu_skin = True
         if self.menu_credits and pyxel.btnp(pyxel.KEY_SPACE):
             # Escape from option 2
             self.menu_credits = False
+        if self.menu_skin:
+            if pyxel.btnp(pyxel.KEY_SPACE):
+                # Escape from option 3
+                self.menu_skin = False
+            if pyxel.btnp(pyxel.KEY_1) or pyxel.btnp(pyxel.KEY_KP_1):
+                # Load resource 1
+                self.current_skin = 0
+                pyxel.load(self.skins[self.current_skin])
+            if pyxel.btnp(pyxel.KEY_2) or pyxel.btnp(pyxel.KEY_KP_2):
+                # Load resource 2
+                self.current_skin = 1
+                pyxel.load(self.skins[self.current_skin])
         # Kill all those stars who left the screen
         for star_pos in range(len(self.menu_stars)):
             try:
@@ -706,7 +725,7 @@ at github.com/DiddiLeija/diddi-and-the-bugs
         for trash in self.menu_trash:
             trash.draw()
         self.menu_monster.draw()
-        if not self.menu_credits:
+        if not self.menu_credits and not self.menu_skin:
             # Intro text
             pyxel.text(26, 25, "=== Diddi and the Bugs ===", 1)
             pyxel.text(25, 25, "=== Diddi and the Bugs ===", 7)
@@ -716,7 +735,10 @@ at github.com/DiddiLeija/diddi-and-the-bugs
             # Option 2
             pyxel.text(26, 45, "[2] Credits", 1)
             pyxel.text(25, 45, "[2] Credits", 7)
-        else:
+            # Option 3
+            pyxel.text(26, 55, "[3] Choose Skin", 1)
+            pyxel.text(25, 55, "[3] Choose Skin", 7)
+        elif self.menu_credits:
             # Show the credits...
             # Intro text
             pyxel.text(16, 25, "=== Credits of Diddi and the Bugs ===", 1)
@@ -724,6 +746,28 @@ at github.com/DiddiLeija/diddi-and-the-bugs
             # Credits text
             pyxel.text(6, 35, self.credits_text, 1)
             pyxel.text(5, 35, self.credits_text, 7)
+            # Escape option
+            pyxel.text(26, 95, "Press SPACE to return", 1)
+            pyxel.text(25, 95, "Press SPACE to return", 7)
+        elif self.menu_skin:
+            # Choose the skin...
+            # Intro text
+            pyxel.text(16, 25, "=== Choose A Skin Pack ===", 1)
+            pyxel.text(15, 25, "=== Choose A Skin Pack ===", 7)
+            # Skin A
+            pyxel.text(
+                26, 35, "[1] Skin A" + ("<-" if self.current_skin == 0 else ""), 1
+            )
+            pyxel.text(
+                25, 35, "[1] Skin A" + ("<-" if self.current_skin == 0 else ""), 7
+            )
+            # Skin B
+            pyxel.text(
+                26, 45, "[2] Skin B" + ("<-" if self.current_skin == 1 else ""), 1
+            )
+            pyxel.text(
+                25, 45, "[2] Skin B" + ("<-" if self.current_skin == 1 else ""), 7
+            )
             # Escape option
             pyxel.text(26, 95, "Press SPACE to return", 1)
             pyxel.text(25, 95, "Press SPACE to return", 7)
