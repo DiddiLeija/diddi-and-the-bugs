@@ -2,6 +2,7 @@
 The piece of code that puts everything together.
 """
 
+import glob
 import random
 import sys
 
@@ -23,6 +24,15 @@ pyxel.init(180, 140, title="Diddi and the Bugs")
 # frames. This means the special effect will last
 # 20 frames, and then everything will turn back to normal.
 Z_ANIMATION_TIME = 20
+
+
+def get_skin_name(resource_filename: str):
+    """
+    Returns the Skin's Display Name from the resource filename.
+    Make sure that the resource files are named like `resource_name_you_want_to_show.pyxres`
+    """
+    words = resource_filename.split(".")[0].replace("resource_", "").split("_")
+    return " ".join([w.upper() for w in words])
 
 
 class Bullet:
@@ -282,8 +292,10 @@ class App:
         # the app quits.
         self.messages = []
 
-        self.skins = ["resource.pyxres", "resource_2.pyxres"]
-        self.current_skin = 0
+        # self.skins = ["resource.pyxres", "resource_2.pyxres"]
+        # self.current_skin = 0
+
+        self.load_skins()
 
         pyxel.load(self.skins[self.current_skin])
 
@@ -305,6 +317,12 @@ class App:
 
         self.startup()
         pyxel.run(self.update, self.draw)
+
+    def load_skins(self):
+        # TODO: Currently only 5 skins can fit well onscreen, maybe even 6, but no more
+        self.skins = sorted(glob.glob("*.pyxres"))
+        self.skins = self.skins[:5]
+        self.current_skin = 0
 
     def reset_game(self):
         self.alive = True  # the player is still alive
@@ -669,14 +687,23 @@ at github.com/DiddiLeija/diddi-and-the-bugs
             if pyxel.btnp(pyxel.KEY_SPACE):
                 # Escape from option 3
                 self.menu_skin = False
-            if pyxel.btnp(pyxel.KEY_1) or pyxel.btnp(pyxel.KEY_KP_1):
-                # Load resource 1
-                self.current_skin = 0
-                pyxel.load(self.skins[self.current_skin])
-            if pyxel.btnp(pyxel.KEY_2) or pyxel.btnp(pyxel.KEY_KP_2):
-                # Load resource 2
-                self.current_skin = 1
-                pyxel.load(self.skins[self.current_skin])
+
+            if pyxel.btnp(pyxel.KEY_UP):
+                if self.current_skin > 0:
+                    self.current_skin -= 1
+                    pyxel.load(self.skins[self.current_skin])
+
+            if pyxel.btnp(pyxel.KEY_DOWN):
+                if self.current_skin < len(self.skins) - 1:
+                    self.current_skin += 1
+                    pyxel.load(self.skins[self.current_skin])
+
+            for index, skin in enumerate(self.skins):
+                if pyxel.btnp(getattr(pyxel, f"KEY_{index+1}")) or pyxel.btnp(
+                    getattr(pyxel, f"KEY_KP_{index+1}")
+                ):
+                    self.current_skin = index
+                    pyxel.load(self.skins[self.current_skin])
         # Kill all those stars who left the screen
         for star_pos in range(len(self.menu_stars)):
             try:
@@ -754,20 +781,23 @@ at github.com/DiddiLeija/diddi-and-the-bugs
             # Intro text
             pyxel.text(16, 25, "=== Choose A Skin Pack ===", 1)
             pyxel.text(15, 25, "=== Choose A Skin Pack ===", 7)
-            # Skin A
-            pyxel.text(
-                26, 35, "[1] Skin A" + ("<-" if self.current_skin == 0 else ""), 1
-            )
-            pyxel.text(
-                25, 35, "[1] Skin A" + ("<-" if self.current_skin == 0 else ""), 7
-            )
-            # Skin B
-            pyxel.text(
-                26, 45, "[2] Skin B" + ("<-" if self.current_skin == 1 else ""), 1
-            )
-            pyxel.text(
-                25, 45, "[2] Skin B" + ("<-" if self.current_skin == 1 else ""), 7
-            )
+
+            for index, skin in enumerate(self.skins):
+                # Skin N
+                pyxel.text(
+                    26,
+                    35 + index * 10,
+                    f"[{index+1}] {get_skin_name(skin)}"
+                    + (" <-" if self.current_skin == index else ""),
+                    1,
+                )
+                pyxel.text(
+                    25,
+                    35 + index * 10,
+                    f"[{index+1}] {get_skin_name(skin)}"
+                    + (" <-" if self.current_skin == index else ""),
+                    7,
+                )
             # Escape option
             pyxel.text(26, 95, "Press SPACE to return", 1)
             pyxel.text(25, 95, "Press SPACE to return", 7)
