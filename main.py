@@ -2,6 +2,7 @@
 The piece of code that puts everything together.
 """
 
+import glob
 import random
 import sys
 
@@ -23,6 +24,15 @@ pyxel.init(180, 140, title="Diddi and the Bugs")
 # frames. This means the special effect will last
 # 20 frames, and then everything will turn back to normal.
 Z_ANIMATION_TIME = 20
+
+
+def get_skin_name(resource_filename: str):
+    """
+    Returns the Skin's Display Name from the resource filename.
+    Make sure that the resource files are named like `resource_name_you_want_to_show.pyxres`
+    """
+    words = resource_filename.split(".")[0].replace("resource_", "").split("_")
+    return " ".join([w.upper() for w in words])
 
 
 class Bullet:
@@ -282,7 +292,12 @@ class App:
         # the app quits.
         self.messages = []
 
-        pyxel.load("resource.pyxres")
+        # self.skins = ["resource.pyxres", "resource_2.pyxres"]
+        # self.current_skin = 0
+
+        self.load_skins()
+
+        pyxel.load(self.skins[self.current_skin])
 
         self.message_goodies = [
             "Woo hoo!",
@@ -302,6 +317,12 @@ class App:
 
         self.startup()
         pyxel.run(self.update, self.draw)
+
+    def load_skins(self):
+        # TODO: Currently only 5 skins can fit well onscreen, maybe even 6, but no more
+        self.skins = sorted(glob.glob("*.pyxres"))
+        self.skins = self.skins[:5]
+        self.current_skin = 0
 
     def reset_game(self):
         self.alive = True  # the player is still alive
@@ -335,6 +356,7 @@ class App:
         self.menu_stars = [Star() for sth in range(100)]
 
         self.menu_credits = False  # If True, display the credits
+        self.menu_skin = False
 
         # This is the credits' text
         self.credits_text = """This game was created by Diego Ramirez.\n
@@ -647,17 +669,41 @@ at github.com/DiddiLeija/diddi-and-the-bugs
     def update_menu(self):
         if pyxel.btnp(pyxel.KEY_Q):
             pyxel.quit()
-        if not self.menu_credits:
-            if pyxel.btnp(pyxel.KEY_1):
+        if not self.menu_credits and not self.menu_skin:
+            if pyxel.btnp(pyxel.KEY_1) or pyxel.btnp(pyxel.KEY_KP_1):
                 # Option 1 -- Start the game
                 self.on_menu = False
                 self.startup()
-            if pyxel.btnp(pyxel.KEY_2):
+            if pyxel.btnp(pyxel.KEY_2) or pyxel.btnp(pyxel.KEY_KP_2):
                 # Option 2 -- Display credits
                 self.menu_credits = True
+            if pyxel.btnp(pyxel.KEY_3) or pyxel.btnp(pyxel.KEY_KP_3):
+                # Option 3 -- Choose the Skin
+                self.menu_skin = True
         if self.menu_credits and pyxel.btnp(pyxel.KEY_SPACE):
             # Escape from option 2
             self.menu_credits = False
+        if self.menu_skin:
+            if pyxel.btnp(pyxel.KEY_SPACE):
+                # Escape from option 3
+                self.menu_skin = False
+
+            if pyxel.btnp(pyxel.KEY_UP):
+                if self.current_skin > 0:
+                    self.current_skin -= 1
+                    pyxel.load(self.skins[self.current_skin])
+
+            if pyxel.btnp(pyxel.KEY_DOWN):
+                if self.current_skin < len(self.skins) - 1:
+                    self.current_skin += 1
+                    pyxel.load(self.skins[self.current_skin])
+
+            for index, skin in enumerate(self.skins):
+                if pyxel.btnp(getattr(pyxel, f"KEY_{index+1}")) or pyxel.btnp(
+                    getattr(pyxel, f"KEY_KP_{index+1}")
+                ):
+                    self.current_skin = index
+                    pyxel.load(self.skins[self.current_skin])
         # Kill all those stars who left the screen
         for star_pos in range(len(self.menu_stars)):
             try:
@@ -706,7 +752,7 @@ at github.com/DiddiLeija/diddi-and-the-bugs
         for trash in self.menu_trash:
             trash.draw()
         self.menu_monster.draw()
-        if not self.menu_credits:
+        if not self.menu_credits and not self.menu_skin:
             # Intro text
             pyxel.text(26, 25, "=== Diddi and the Bugs ===", 1)
             pyxel.text(25, 25, "=== Diddi and the Bugs ===", 7)
@@ -716,7 +762,10 @@ at github.com/DiddiLeija/diddi-and-the-bugs
             # Option 2
             pyxel.text(26, 45, "[2] Credits", 1)
             pyxel.text(25, 45, "[2] Credits", 7)
-        else:
+            # Option 3
+            pyxel.text(26, 55, "[3] Choose Skin", 1)
+            pyxel.text(25, 55, "[3] Choose Skin", 7)
+        elif self.menu_credits:
             # Show the credits...
             # Intro text
             pyxel.text(16, 25, "=== Credits of Diddi and the Bugs ===", 1)
@@ -724,6 +773,31 @@ at github.com/DiddiLeija/diddi-and-the-bugs
             # Credits text
             pyxel.text(6, 35, self.credits_text, 1)
             pyxel.text(5, 35, self.credits_text, 7)
+            # Escape option
+            pyxel.text(26, 95, "Press SPACE to return", 1)
+            pyxel.text(25, 95, "Press SPACE to return", 7)
+        elif self.menu_skin:
+            # Choose the skin...
+            # Intro text
+            pyxel.text(16, 25, "=== Choose A Skin Pack ===", 1)
+            pyxel.text(15, 25, "=== Choose A Skin Pack ===", 7)
+
+            for index, skin in enumerate(self.skins):
+                # Skin N
+                pyxel.text(
+                    26,
+                    35 + index * 10,
+                    f"[{index+1}] {get_skin_name(skin)}"
+                    + (" <-" if self.current_skin == index else ""),
+                    1,
+                )
+                pyxel.text(
+                    25,
+                    35 + index * 10,
+                    f"[{index+1}] {get_skin_name(skin)}"
+                    + (" <-" if self.current_skin == index else ""),
+                    7,
+                )
             # Escape option
             pyxel.text(26, 95, "Press SPACE to return", 1)
             pyxel.text(25, 95, "Press SPACE to return", 7)
