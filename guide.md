@@ -1,4 +1,4 @@
-# Diddi and the Bugs -- The definitive guide
+# Diddi and the Bugs -- The ultimate guide
 
 <img width=800 src="https://user-images.githubusercontent.com/83621221/196548442-c0995ce6-5593-48a3-b9e9-1849922e88b2.png">
 
@@ -16,12 +16,13 @@ This is the main menu. You can pick an option by pressing one of these keys:
 
 - **1**: Start the real game.
 - **2**: See the credits scene. Basically, it redirects to the [THANKS.txt](THANKS.txt) file from this repo.
+- **3**: Change the skin pack (see the _Advanced settings > Using Skin Packs_ section below).
 
-## Keys
+## Gameplay Keys
 
 If you press some keys, some actions may happen.
 
-### General event keys
+### General events
 
 - **P**: Pause the game, saving scores and coordinates. If the game is paused,
   press **P** again to keep playing [^1].
@@ -128,6 +129,41 @@ The Monster is stronger than regular enemies and trash, so you must
 If destroyed, the Monster will leave **1000 extra points**! However, if it
 crosses the screen without being defeated, it won't appear again and won't
 leave any points. You'll have to start again for a chance to destroy it.
+
+## Advanced settings
+
+**Would you like to further customize your Diddi and the Bugs experience?** Then
+keep reading, you may find the following options useful!
+
+### Using Skin Packs
+
+_New in version 4.0.0._
+
+Since 4.0.0, you can use several skin packs to customize the game's aspect. To select one,
+press 3 in the main menu, then pick a skin pack (with a live preview).
+
+<img width="400" alt="image" src="https://github.com/DiddiLeija/diddi-and-the-bugs/assets/83621221/97e9bf2d-1638-46b1-8231-eb6f58417c9b"></img>
+<img width="400" alt="image" src="https://github.com/DiddiLeija/diddi-and-the-bugs/assets/83621221/56fa1dcc-e458-43da-b31f-104b7c2c3a2f"></img>
+
+_This is a quick demonstration of the two skin packs bundled to the 4.0.0 release: "Diddi" (the main theme)
+and "Training Eli"._
+
+### Adding a skin pack
+
+_New in version 4.0.0._
+
+_**NOTE:** Custom skin packs are only fully allowed in the Python edition of the game. We are working on documentation for the Windows-only and Pyxel-packaged editions, and this probably won't be allowed in the HTML version._
+
+If you want to load your own skin pack into your Diddi and the Bugs game, follow these steps:
+
+1. Duplicate the main `resource_diddi.pyxres` file, and name the new file `resource_SKIN PACK NAME.pyxres`.
+2. Using [Pyxel](https://github.com/kitao/pyxel), run `pyxel edit resource_SKIN PACK NAME.pyxres`.
+3. Use the Pyxel interface to edit your resource. You can edit the mobs and the music freely.
+4. Once you're done, save your resource, run Diddi and the Bugs, and select you `SKIN PACK NAME` skin (see the "Using Skin Packs" section above).
+
+You can see the first 5 skin packs (alphabetically sorted) found in the game's main folder.
+
+If you would like your skin to become a default option in the game for everyone, reach out to us via [Discord](https://discord.gg/DfrHxT9ENy)!
 
 [^1]: This function does not apply in the main menu interface.
 [^2]: Unfortunately, this is totally true.
