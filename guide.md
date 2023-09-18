@@ -161,9 +161,10 @@ If you want to load your own skin pack into your Diddi and the Bugs game, follow
 3. Use the Pyxel interface to edit your resource. You can edit the mobs and the music freely.
 4. Once you're done, save your resource, run Diddi and the Bugs, and select you `SKIN PACK NAME` skin (see the "Using Skin Packs" section above).
 
-You can see the first 5 skin packs (alphabetically sorted) found in the game's main folder.
+You can see the first 5 skin packs (alphabetically sorted) found in the game's main folder. The first skin in that list is loaded during initialization as the default skin [^3].
 
 If you would like your skin to become a default option in the game for everyone, reach out to us via [Discord](https://discord.gg/DfrHxT9ENy)!
 
 [^1]: This function does not apply in the main menu interface.
 [^2]: Unfortunately, this is totally true.
+[^3]: In the initial bundle, this "first skin" is _Diddi_ (the original skin) and is loaded by default. However, any other skin that's alphabetically before this skin's name name will be loaded by default instead.
