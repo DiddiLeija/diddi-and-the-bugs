@@ -8,7 +8,7 @@ get the greatest scores, and enjoy the game as best as you can.
 
 ## The menu
 
-<img width=500 src="https://user-images.githubusercontent.com/83621221/196548594-17fec858-ebb2-45ff-8e96-e17e137e1442.png">
+<img width=500 src="https://github.com/DiddiLeija/diddi-and-the-bugs/assets/83621221/743b3547-7f1b-4cdb-a85a-ecd5e602aef4">
 
 _New in version 3.0.0._
 
