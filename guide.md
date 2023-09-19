@@ -152,14 +152,14 @@ and "Training Eli"._
 
 _New in version 4.0.0._
 
-_**NOTE:** Custom skin packs are only fully allowed in the Python edition of the game. We are working on documentation for the Windows-only and Pyxel-packaged editions, and this probably won't be allowed in the HTML version._
+_**NOTE:** Custom skin packs are only fully allowed in the Python edition of the game. We are working on documentation/support for the Windows-only and Pyxel-packaged editions, and this probably won't be allowed in the HTML version._
 
 If you want to load your own skin pack into your Diddi and the Bugs game, follow these steps:
 
-1. Duplicate the main `resource_diddi.pyxres` file, and name the new file `resource_SKIN PACK NAME.pyxres`.
-2. Using [Pyxel](https://github.com/kitao/pyxel), run `pyxel edit resource_SKIN PACK NAME.pyxres`.
+1. Duplicate the main `resource_diddi.pyxres` file, and name the new file `resource_SKIN_PACK_NAME.pyxres`.
+2. Using [Pyxel](https://github.com/kitao/pyxel), run `pyxel edit resource_SKIN_PACK_NAME.pyxres`.
 3. Use the Pyxel interface to edit your resource. You can edit the mobs and the music freely.
-4. Once you're done, save your resource, run Diddi and the Bugs, and select you `SKIN PACK NAME` skin (see the "Using Skin Packs" section above).
+4. Once you're done, save your resource, run Diddi and the Bugs, and select your `SKIN PACK NAME` skin (see the "Using Skin Packs" section above).
 
 You can see the first 5 skin packs (alphabetically sorted) found in the game's main folder. The first skin in that list is loaded during initialization as the default skin [^3].
 
@@ -167,4 +167,4 @@ If you would like your skin to become a default option in the game for everyone,
 
 [^1]: This function does not apply in the main menu interface.
 [^2]: Unfortunately, this is totally true.
-[^3]: In the initial bundle, this "first skin" is _Diddi_ (the original skin) and is loaded by default. However, any other skin that's alphabetically before this skin's name name will be loaded by default instead.
+[^3]: However, you should note some "default skin names" have preference before any other skin. Then, a skin named _ABC_ will come **after** _Diddi_ (the original skin, and the most preferred). If any of the "preferred skins" is not there, it won't appear.

@@ -3,6 +3,7 @@ The piece of code that puts everything together.
 """
 
 import glob
+import os
 import random
 import sys
 
@@ -24,6 +25,19 @@ pyxel.init(180, 140, title="Diddi and the Bugs")
 # frames. This means the special effect will last
 # 20 frames, and then everything will turn back to normal.
 Z_ANIMATION_TIME = 20
+
+# This is a list of "preferred skin packs" (those skins bundled
+# in our default edition), which will be shown first if we find them.
+SKINS_PREFERENCES = ["resource_diddi.pyxres", "resource_training_eli.pyxres"]
+
+
+def get_found_skins(resource_list: list):
+    "From a list of filenames, only return the filenames that exist."
+    final = []
+    for f in resource_list:
+        if os.path.exists(f):
+            final.append(f)
+    return final
 
 
 def get_skin_name(resource_filename: str):
@@ -320,7 +334,10 @@ class App:
 
     def load_skins(self):
         # TODO: Currently only 5 skins can fit well onscreen, maybe even 6, but no more
-        self.skins = sorted(glob.glob("*.pyxres"))
+        self.skins = get_found_skins(SKINS_PREFERENCES)
+        for i in sorted(glob.glob("*.pyxres")):
+            if i not in SKINS_PREFERENCES:
+                self.skins.append(i)
         self.skins = self.skins[:5]
         self.current_skin = 0
 
