@@ -336,15 +336,19 @@ class App:
         for i in sorted(glob.glob("resource_*.pyxres")):
             if i not in SKINS_PREFERENCES:
                 self.skins.append(i)
-                
+
         page = 1
         self.paged_skins = []
-        page_skins = self.skins[(page - 1) * 5 : page * 5]
+        start = (page - 1) * 5
+        end = page * 5
+        page_skins = self.skins[start:end]
 
         while page_skins:
             self.paged_skins.append(page_skins)
             page += 1
-            page_skins = self.skins[(page - 1) * 5 : page * 5]
+            start = (page - 1) * 5
+            end = page * 5
+            page_skins = self.skins[start:end]
 
         self.current_skin = 0
         self.current_page = 0
