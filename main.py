@@ -3,6 +3,7 @@ The piece of code that puts everything together.
 """
 
 import glob
+import os
 import random
 import sys
 
@@ -24,6 +25,19 @@ pyxel.init(180, 140, title="Diddi and the Bugs")
 # frames. This means the special effect will last
 # 20 frames, and then everything will turn back to normal.
 Z_ANIMATION_TIME = 20
+
+# This is a list of "preferred skin packs" (those skins bundled
+# in our default edition), which will be shown first if we find them.
+SKINS_PREFERENCES = ["resource_diddi.pyxres", "resource_training_eli.pyxres"]
+
+
+def get_found_skins(resource_list: list):
+    "From a list of filenames, only return the filenames that exist."
+    final = []
+    for f in resource_list:
+        if os.path.exists(f):
+            final.append(f)
+    return final
 
 
 def get_skin_name(resource_filename: str):
@@ -292,9 +306,6 @@ class App:
         # the app quits.
         self.messages = []
 
-        # self.skins = ["resource.pyxres", "resource_2.pyxres"]
-        # self.current_skin = 0
-
         self.load_skins()
 
         pyxel.load(self.skins[self.current_skin])
@@ -321,8 +332,11 @@ class App:
     # Loads all the skins in the current dir named in the format resource_NAME_HERE.pyxres
     # They are split into pages of 5 each
     def load_skins(self):
-        self.skins = sorted(glob.glob("*.pyxres"))
-
+        self.skins = get_found_skins(SKINS_PREFERENCES)
+        for i in sorted(glob.glob("resource_*.pyxres")):
+            if i not in SKINS_PREFERENCES:
+                self.skins.append(i)
+                
         page = 1
         self.paged_skins = []
         page_skins = self.skins[(page-1)*5 : page*5]
