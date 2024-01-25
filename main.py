@@ -49,6 +49,11 @@ def get_skin_name(resource_filename: str):
     return " ".join([w.upper() for w in words])
 
 
+def get_bgcol():
+    "Returns the real-time background color (set in resource image 0, pixel 0, 0)"
+    return pyxel.images[0].pget(0, 0)
+
+
 class Bullet:
     "An independent bullet."
 
@@ -638,7 +643,7 @@ at github.com/DiddiLeija/diddi-and-the-bugs
             pyxel.blt(self.player_x, self.player_y, 0, 8, 0, 8, 8, 0)
 
     def draw_game(self):
-        pyxel.cls(0)
+        pyxel.cls(get_bgcol())
         score = f"Score: {self.score}"
         enem_count = f"Enemies: {len(self.enemies)}"
         pyxel.text(5, 4, score, 1)
@@ -778,7 +783,7 @@ at github.com/DiddiLeija/diddi-and-the-bugs
 
     def draw_menu(self):
         # Draw the screen
-        pyxel.cls(0)
+        pyxel.cls(get_bgcol())
         # Draw stars
         for star in self.menu_stars:
             star.draw()
