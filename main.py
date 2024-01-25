@@ -299,7 +299,7 @@ class Star:
     def draw(self):
         if self.show:
             # ... draw here ...
-            pyxel.pset(self.x, self.y, 7)
+            pyxel.blt(self.x, self.y, 0, 32, 16, 8, 8, 0)
 
 
 class App:
