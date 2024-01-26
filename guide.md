@@ -142,8 +142,8 @@ _New in version 4.0.0._
 Since 4.0.0, you can use several skin packs to customize the game's aspect. To select one,
 press 3 in the main menu, then pick a skin pack (with a live preview).
 
-<img width="400" alt="image" src="https://github.com/DiddiLeija/diddi-and-the-bugs/assets/83621221/97e9bf2d-1638-46b1-8231-eb6f58417c9b"></img>
-<img width="400" alt="image" src="https://github.com/DiddiLeija/diddi-and-the-bugs/assets/83621221/56fa1dcc-e458-43da-b31f-104b7c2c3a2f"></img>
+<img width="400" alt="image" src="https://github.com/DiddiLeija/diddi-and-the-bugs/assets/83621221/1c605340-46d7-4a77-b10b-6611c228cc83"></img>
+<img width="400" alt="image" src="https://github.com/DiddiLeija/diddi-and-the-bugs/assets/83621221/43a95168-206c-480d-b9be-48db8985d413"></img>
 
 _This is a quick demonstration of the two skin packs bundled to the 4.0.0 release: "Diddi" (the main theme)
 and "Training Eli"._
@@ -156,14 +156,14 @@ _**NOTE:** Custom skin packs are only fully allowed in the Python edition of the
 
 If you want to load your own skin pack into your Diddi and the Bugs game, follow these steps:
 
-1. Duplicate the main `resource_diddi.pyxres` file, and name the new file `resource_SKIN_PACK_NAME.pyxres`.
+1. Duplicate the main `resource_diddi.pyxres` file, and name with the syntax `resource_SKIN_PACK_NAME.pyxres`.
 2. Using [Pyxel](https://github.com/kitao/pyxel), run `pyxel edit resource_SKIN_PACK_NAME.pyxres`.
-3. Use the Pyxel interface to edit your resource. You can edit the mobs and the music freely.
+3. Use the Pyxel interface to edit your resource. You can edit the mobs, the background colors and the music.
 4. Once you're done, save your resource, run Diddi and the Bugs, and select your `SKIN PACK NAME` skin (see the "Using Skin Packs" section above).
 
-You can see the first 5 skin packs (alphabetically sorted) found in the game's main folder. The first skin in that list is loaded during initialization as the default skin [^3].
+You can see all the skin packs (alphabetically sorted) found in the game's folder. The first skin in that list is loaded during initialization as the default skin [^3].
 
-If you would like your skin to become a default option in the game for everyone, reach out to us via [Discord](https://discord.gg/DfrHxT9ENy)!
+If you would like your skin to become a built-in option in the game for everyone, reach out to us via [Discord](https://discord.gg/DfrHxT9ENy)!
 
 [^1]: This function does not apply in the main menu interface.
 [^2]: Unfortunately, this is totally true.
