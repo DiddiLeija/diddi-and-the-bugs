@@ -49,9 +49,9 @@ def get_skin_name(resource_filename: str):
     return " ".join([w.upper() for w in words])
 
 
-def get_bgcol():
+def get_bgcol(x=0, y=0):
     "Returns the real-time background color (set in resource image 0, pixel 0, 0)"
-    return pyxel.images[0].pget(0, 0)
+    return pyxel.images[0].pget(x, y)
 
 
 class Bullet:
@@ -620,8 +620,8 @@ at github.com/DiddiLeija/diddi-and-the-bugs
 
     def draw_message_bar(self):
         # This will draw the messages bar.
-        pyxel.rect(0, pyxel.height - 20, pyxel.width, 20, 5)
-        pyxel.rect(0, pyxel.height - 20, pyxel.width, 2, 13)
+        pyxel.rect(0, pyxel.height - 20, pyxel.width, 20, get_bgcol(24, 24))
+        pyxel.rect(0, pyxel.height - 20, pyxel.width, 2, get_bgcol(24, 16))
 
         # Draw the messages
         if len(self.messages) > 0:
