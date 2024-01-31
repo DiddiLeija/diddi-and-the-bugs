@@ -47,9 +47,12 @@ If you have [Nox](https://nox.thea.codes) and the Python required version (see a
 of commands to generate the source zip, the Pyxel executable and the Windows executable (if running under Windows). The final
 contents will be found on a `dist` folder [^1].
 
-### Web support!
+### Web support
 
-Try out the latest dist: **the Pyxel web version!** See it [here](https://kitao.github.io/pyxel/wasm/launcher/?run=DiddiLeija.diddi-and-the-bugs...main).
+Try out the latest dist: **the Pyxel web version!** You'll find this in the `html_dist` format of the game on [itch.io](https://diddileija.itch.io/diddi-and-the-bugs),
+along with the source, the Pyxel-packaged and Windows-only versions.
+
+You can also see the legacy, nightly web version (hosted online) [here](https://kitao.github.io/pyxel/wasm/launcher/?run=DiddiLeija.diddi-and-the-bugs...main).
 
 ## How to win
 
