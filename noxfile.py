@@ -18,17 +18,14 @@ files = ["noxfile.py", "main.py", "setup.py"]
 def format(session):
     "Run formatters."
     session.install("-r", "test-requirements.txt")
-    session.run("isort", *files)
-    session.run("black", *files)
+    session.run("ruff", "check", *files, "--fix")
 
 
 @nox.session
 def lint(session):
     "Check the style and quality."
     session.install("-r", "test-requirements.txt")
-    session.run("flake8", *files, "--max-line-length=127")
-    session.run("isort", "--check-only", *files)
-    session.run("black", "--check", *files)
+    session.run("ruff", "check", *files)
 
 
 @nox.session
@@ -42,9 +39,9 @@ def package(session):
     session.warn("Looking for the destination path...")
     dist_generation = "import os; os.mkdir('./dist')"
     if os.path.exists("./dist"):
-        if not input(
+        if input(
             "The destination directory ('./dist') already exists. Do you want to remove it? (y/n) "
-        ).strip().lower() in ("y", "yes"):
+        ).strip().lower() not in ("y", "yes"):
             session.warn("Aborting...")
             quit()
         dist_generation = (
