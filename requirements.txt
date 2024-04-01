@@ -1,4 +1,4 @@
 # Keep the dependencies pinned, so we
 # can control breaking changes.
 
-pyxel==2.0.9
+pyxel==2.0.10
