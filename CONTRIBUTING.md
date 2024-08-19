@@ -66,5 +66,5 @@ can run Nox as many times as you need, anytime.
 Since version 2.0.0, you can get these distributions at a `dist/` folder. To generate them, run this command with Nox:
 
 ```sh
-nox -s create-packages
+nox -s package
 ```
