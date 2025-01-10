@@ -19,7 +19,7 @@ try:
 except ImportError:
     sys.exit("COuld not find package 'cx_Freeze'. Please install it and try again.")
 
-EXPECTED_PYTHON = (3, 8)
+EXPECTED_PYTHON = (3, 9)
 
 if sys.platform != "win32":
     sys.exit(
