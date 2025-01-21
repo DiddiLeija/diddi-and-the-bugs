@@ -37,7 +37,7 @@ setup(
     executables=[
         Executable(
             "main.py",
-            base="Win32GUI",
+            base="gui",
         )
     ],
 )

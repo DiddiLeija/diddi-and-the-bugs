@@ -101,9 +101,7 @@ def package(session):
     # If Windows, create the cx_Freeze executable
     if sys.platform == "win32":
         session.warn("Running in Windows, generating the cx_Freeze executable...")
-        # NOTE: we install cx_Freeze < 7 by now, as setup.py is no longer working with newer
-        # versions. We should fix this at some point.
-        session.install("cx_Freeze<7")
+        session.install("-r", "requirements-win32.txt")
         session.run("python", "setup.py", "build")
         for i in res_files:
             session.run(
