@@ -11,10 +11,10 @@ assignees: ''
 <!--- Give us a clear explanation of your issue --->
 
 **How to reproduce**
-<!--- How to reproduce this issue? --->
+<!--- How can we reproduce this issue? --->
 
 **Distribution**
-<!--- What distribution (or distributions) of our game did you use? --->
+<!--- What distribution (or distributions) of our game are affected? --->
 
 - [ ] Windows executable (`windows.zip`)
 - [ ] Pyxel executable (`pyxel-dist.zip`)
@@ -25,6 +25,6 @@ assignees: ''
 <!--- Provide details of your environment to reproduce this issue. --->
 
 - **Python version (if applies)**: 
-- **Pyxel version**:
-- **OS**:
-- **_Diddi and the Bugs_ version**:
+- **Pyxel version**: 
+- **OS**: 
+- **_Diddi and the Bugs_ version**: 

@@ -146,7 +146,7 @@ press 3 in the main menu, then pick a skin pack (with a live preview).
 <img width="400" alt="image" src="https://github.com/DiddiLeija/diddi-and-the-bugs/assets/83621221/43a95168-206c-480d-b9be-48db8985d413"></img>
 
 _This is a quick demonstration of the two skin packs bundled to the 4.0.0 release: "Diddi" (the main theme)
-and "Training Eli"._
+and "Training Eli" [^3]._
 
 ### Adding a skin pack
 
@@ -161,10 +161,11 @@ If you want to load your own skin pack into your Diddi and the Bugs game, follow
 3. Use the Pyxel interface to edit your resource. You can edit the mobs, the background colors and the music.
 4. Once you're done, save your resource, run Diddi and the Bugs, and select your `SKIN PACK NAME` skin (see the "Using Skin Packs" section above).
 
-You can see all the skin packs (alphabetically sorted) found in the game's folder. The first skin in that list is loaded during initialization as the default skin [^3].
+You can see all the skin packs (alphabetically sorted) found in the game's folder. The first skin in that list is loaded during initialization as the default skin [^4].
 
 If you would like your skin to become a built-in option in the game for everyone, reach out to us via [Discord](https://discord.gg/DfrHxT9ENy)!
 
 [^1]: This function does not apply in the main menu interface.
 [^2]: Unfortunately, this is totally true.
-[^3]: However, you should note some "default skin names" have preference before any other skin. Then, a skin named _ABC_ will come **after** _Diddi_ (the original skin, and the most preferred). If any of the "preferred skins" is not there, it won't appear.
+[^3]: The \"Training Eli" skin was initially a test pack and an inside joke referring to other game in development, [Diddi and Eli](https://github.com/DiddiLeija/diddi-and-eli), making the Eli character canon :)
+[^4]: However, you should note some "default skin names" have preference before any other skin. Then, a skin named _ABC_ will come **after** _Diddi_ (the original skin, and the most preferred). If any of the "preferred skins" is not there, it won't appear.

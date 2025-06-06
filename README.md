@@ -27,16 +27,14 @@ My Game Off 2021 entry.
 ## Installation
 
 Since the GameOff 2021 event is hosted by [itch.io](https://itch.io), the distributions are available there. The source
-code lives in this GitHub repository, but the stable distributions are available at itch.io.
-
-The itch.io page for my game is here: https://diddileija.itch.io/diddi-and-the-bugs.
+code lives in this GitHub repository, but the latest stable version is available at https://diddileija.itch.io/diddi-and-the-bugs.
 
 Once you are there, read the installation instructions and find the right distribution for you.
 If you don't find what you expected, feel free to open an issue on GitHub (or comment in the itch.io page).
 
 ### Python version
 
-If you will use Python get sure to have **Python >= 3.8**.
+If you will use Python get sure to have **Python >= 3.9**.
 
 ### Building the zipped distributions by yourself
 
