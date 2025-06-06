@@ -19,6 +19,7 @@ def format(session):
     "Run formatters."
     session.install("-r", "test-requirements.txt")
     session.run("ruff", "check", *files, "--fix")
+    session.run("ruff", "format", *files)
 
 
 @nox.session

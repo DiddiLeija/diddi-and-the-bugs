@@ -83,6 +83,7 @@ class Bullet:
 
 class Enemy:
     "Some bugs!"
+
     # We've put this outside of __init__
     # to avoid issues with instances.
     z_killed = -1
@@ -828,20 +829,20 @@ at github.com/DiddiLeija/diddi-and-the-bugs
                 pyxel.text(
                     26,
                     35 + index * 10,
-                    f"[{(index+1) + (self.current_page*5)}] {get_skin_name(skin)}"
+                    f"[{(index + 1) + (self.current_page * 5)}] {get_skin_name(skin)}"
                     + (" <-" if self.current_skin == index else ""),
                     1,
                 )
                 pyxel.text(
                     25,
                     35 + index * 10,
-                    f"[{(index+1) + (self.current_page*5)}] {get_skin_name(skin)}"
+                    f"[{(index + 1) + (self.current_page * 5)}] {get_skin_name(skin)}"
                     + (" <-" if self.current_skin == index else ""),
                     7,
                 )
             # Page Counter
-            pyxel.text(70, 95, f"=== {self.current_page+1}/{self.total_pages} ===", 1)
-            pyxel.text(69, 95, f"=== {self.current_page+1}/{self.total_pages} ===", 7)
+            pyxel.text(70, 95, f"=== {self.current_page + 1}/{self.total_pages} ===", 1)
+            pyxel.text(69, 95, f"=== {self.current_page + 1}/{self.total_pages} ===", 7)
 
             # Escape option
             pyxel.text(26, 105, "Press SPACE to return", 1)
